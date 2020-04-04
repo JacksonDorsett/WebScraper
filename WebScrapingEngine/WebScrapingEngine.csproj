@@ -47,12 +47,17 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ILinkScraper.cs" />
     <Compile Include="InternalLinkScraper.cs" />
+    <Compile Include="IPageScraper.cs" />
+    <Compile Include="IPageValidator.cs" />
+    <Compile Include="PageHistory.cs" />
+    <Compile Include="PathNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Url.cs" />
     <Compile Include="UrlParameterException.cs" />
     <Compile Include="UrlQuery.cs" />
     <Compile Include="UrlQueryParameter.cs" />
     <Compile Include="Utility\Pair.cs" />
+    <Compile Include="WebScraper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
