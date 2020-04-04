@@ -14,13 +14,13 @@ namespace WebScrapingEngine
     /// Link scraper interface.
     /// </summary>
     /// <typeparam name="T">Html Parser used.</typeparam>
-    public interface ILinkScraper<T>
+    public interface ILinkScraper
     {
         /// <summary>
         /// Collects the Page Links.
         /// </summary>
         /// <param name="htmlDoc">Html page to be parsed.</param>
         /// <returns>list of page links.</returns>
-        Url[] ScrapeLinks(T htmlDoc);
+        Url[] ScrapeLinks();
     }
 }
