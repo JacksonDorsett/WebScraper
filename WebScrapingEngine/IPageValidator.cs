@@ -1,14 +1,16 @@
 ﻿namespace WebScrapingEngine
 {
     /// <summary>
-    /// Validates page.
+    /// Validate page.
     /// </summary>
-    public interface IPageValidator
+    /// <typeparam name="T">Html document.</typeparam>
+    public interface IPageValidator<T>
     {
         /// <summary>
-        /// ChecksWhether page can be scraped.
+        /// Validate Page.
         /// </summary>
-        /// <returns>if page can be scraped.</returns>
-        bool ValidatePage();
+        /// <param name="page">Page</param>
+        /// <returns>if page can be extracted.</returns>
+        bool ValidatePage(T page);
     }
 }

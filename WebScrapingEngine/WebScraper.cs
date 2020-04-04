@@ -10,30 +10,36 @@ namespace WebScrapingEngine
     /// Webscraper object.
     /// </summary>
     /// <typeparam name="T">Object being scraped.</typeparam>
-    public abstract class WebScraper<T>
+    public abstract class WebScraper<T,U>
     {
-        /// <summary>
-        /// Objects scraped.
-        /// </summary>
-        protected List<T> ScrapedObjects { get; private set; }
-
-        protected readonly ILinkScraper linkScraper;
-        protected readonly IPageValidator pageValidator;
-        protected readonly IPageScraper<T> scraper;
         protected PageHistory history;
+        private readonly ILinkScraper<T> linkScraper;
+        private readonly IPageValidator<T> pageValidator;
+        private readonly IPageScraper<T, U> scraper;
 
-
-        protected WebScraper(ILinkScraper linkScraper, IPageScraper<T> pageScraper, IPageValidator pageValidator)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebScraper{T}"/> class.
+        /// </summary>
+        /// <param name="linkScraper">Link Scraper.</param>
+        /// <param name="pageScraper">Page Scraper.</param>
+        /// <param name="pageValidator">Page Validator.</param>
+        protected WebScraper(ILinkScraper<T> linkScraper, IPageScraper<T, U> pageScraper, IPageValidator<T> pageValidator)
         {
             this.history = new PageHistory();
             this.ScrapedObjects = new List<T>();
+            this.linkScraper = linkScraper;
+            this.pageValidator = pageValidator;
+            this.scraper = pageScraper;
         }
+
+        /// <summary>
+        /// Gets list of Objects scraped.
+        /// </summary>
+        protected List<T> ScrapedObjects { get; private set; }
 
         /// <summary>
         /// Abstract Scraping Class.
         /// </summary>
         public abstract void Scrape();
-
-
     }
 }

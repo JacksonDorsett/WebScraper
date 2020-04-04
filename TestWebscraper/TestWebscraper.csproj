@@ -34,16 +34,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.11.23.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.23\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WPRM\TestLinkScrapers.cs" />
     <Compile Include="TestPageHistory.cs" />
     <Compile Include="TestQueryParameter.cs" />
     <Compile Include="TestUrl.cs" />
     <Compile Include="TestUrlQuery.cs" />
+    <Compile Include="WPRM\TestPageValidator.cs" />
+    <Compile Include="WPRM\TestWPRMPageScraper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

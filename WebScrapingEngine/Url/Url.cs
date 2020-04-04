@@ -22,12 +22,12 @@ namespace WebScrapingEngine
         public Url(string url)
         {
             this.FullUrl = url;
-            if (this.FilePath[this.FilePath.Length - 1].Contains('?'))
-            {
-                string s = this.FilePath[this.FilePath.Length - 1];
+            //if (this.FilePath[this.FilePath.Length - 1].Contains('?'))
+            //{
+            //    string s = this.FilePath[this.FilePath.Length - 1];
                 
-                this.FilePath[this.FilePath.Length - 1] = s.Substring(0, s.IndexOf('?'));
-            }
+            //    this.FilePath[this.FilePath.Length - 1] = s.Substring(0, s.IndexOf('?'));
+            //}
         }
 
         /// <summary>
@@ -77,6 +77,7 @@ namespace WebScrapingEngine
 
         private string[] GetFilePath(string url)
         {
+
             url = this.TrimHttps(url);
             url = url.Replace(this.DomainName + '/', string.Empty);
             var v = url.Split('/');
