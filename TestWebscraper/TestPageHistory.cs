@@ -27,11 +27,11 @@ namespace TestWebscraper
         public void TestUrlInput()
         {
             PageHistory ph = new PageHistory();
-            ph.Add(new Url("https://google.com"));
-            ph.Add(new Url("https://amazon.com"));
-            Assert.That(ph.CheckUrl("https://google.com"));
-            Assert.That(ph.CheckUrl("https://amazon.com"));
-            Assert.That(!ph.CheckUrl("https://yelp.com"));
+            ph.Add(new Url("https://google.com/"));
+            ph.Add(new Url("https://amazon.com/"));
+            Assert.That(ph.CheckUrl("https://google.com/"));
+            Assert.That(ph.CheckUrl("https://amazon.com/"));
+            Assert.That(!ph.CheckUrl("https://yelp.com/"));
         }
     }
 }
