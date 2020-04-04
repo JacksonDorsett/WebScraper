@@ -21,14 +21,11 @@ namespace WebScrapingEngine
         /// <param name="url">page url.</param>
         public Url(string url)
         {
-            this.DomainName = this.GetDomainName(url);
-            this.FilePath = this.GetFilePath(url);
             this.FullUrl = url;
-
             if (this.FilePath[this.FilePath.Length - 1].Contains('?'))
             {
                 string s = this.FilePath[this.FilePath.Length - 1];
-                this.Query = new UrlQuery(s);
+                
                 this.FilePath[this.FilePath.Length - 1] = s.Substring(0, s.IndexOf('?'));
             }
         }
@@ -36,7 +33,13 @@ namespace WebScrapingEngine
         /// <summary>
         /// Gets Domain name of the website.
         /// </summary>
-        public string DomainName { get; private set; }
+        public string DomainName
+        {
+            get
+            {
+                return this.GetDomainName(this.FullUrl);
+            }
+        }
 
         /// <summary>
         /// Gets and sets Full url.
@@ -46,12 +49,24 @@ namespace WebScrapingEngine
         /// <summary>
         /// Gets and sets filePath.
         /// </summary>
-        public string[] FilePath { get; private set; }
+        public string[] FilePath
+        {
+            get
+            {
+                return this.GetFilePath(this.FullUrl);
+            }
+        }
 
         /// <summary>
         /// Gets Query of the url.
         /// </summary>
-        public UrlQuery Query { get; private set; }
+        public UrlQuery Query
+        {
+            get
+            {
+                return this.GetQuery();
+            }
+        }
 
         private string GetDomainName(string url)
         {
@@ -64,7 +79,26 @@ namespace WebScrapingEngine
         {
             url = this.TrimHttps(url);
             url = url.Replace(this.DomainName + '/', string.Empty);
-            return url.Split('/');
+            var v = url.Split('/');
+            if (v[v.Length - 1].Contains('?'))
+            {
+                var temp = v[v.Length - 1];
+                temp = temp.Substring(0, temp.IndexOf('?'));
+                v[v.Length - 1] = temp;
+            }
+
+            return v;
+
+        }
+
+        private UrlQuery GetQuery()
+        {
+            if (FullUrl.Contains('?'))
+            {
+                return new UrlQuery(this.FullUrl.Substring(this.FullUrl.IndexOf('?')));
+            }
+
+            return null;
         }
 
         private string TrimHttps(string url)
