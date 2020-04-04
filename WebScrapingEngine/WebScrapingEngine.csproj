@@ -52,10 +52,10 @@
     <Compile Include="PageHistory.cs" />
     <Compile Include="PathNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Url.cs" />
-    <Compile Include="UrlParameterException.cs" />
-    <Compile Include="UrlQuery.cs" />
-    <Compile Include="UrlQueryParameter.cs" />
+    <Compile Include="Url\Url.cs" />
+    <Compile Include="Url\UrlParameterException.cs" />
+    <Compile Include="Url\UrlQuery.cs" />
+    <Compile Include="Url\UrlQueryParameter.cs" />
     <Compile Include="Utility\Pair.cs" />
     <Compile Include="WebScraper.cs" />
   </ItemGroup>
