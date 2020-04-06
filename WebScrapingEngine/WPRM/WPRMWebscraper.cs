@@ -49,7 +49,7 @@ namespace WebScrapingEngine.WPRM
         /// </summary>
         public override void Scrape()
         {
-            while (this.urlQueue.Count != 0)
+            while (this.urlQueue.Count != 0 && this.Recipes.Count < 100)
             {
                 var url = this.urlQueue.Dequeue();
                 var html = this.web.Load(url.FullUrl);

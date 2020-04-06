@@ -34,11 +34,13 @@ namespace WebScrapingEngine.WPRM
 
         private string GetAuthor(HtmlNode node)
         {
-            try
+            var authorNode = node.SelectSingleNode("//span[contains(@class, 'wprm-recipe-details wprm-recipe-author wprm-block-text-normal')]");
+
+            if (authorNode != null)
             {
-                return node.SelectSingleNode("//span[contains(@class, 'wprm-recipe-details wprm-recipe-author wprm-block-text-normal')]").InnerText;
+                return authorNode.InnerText;
             }
-            catch
+            else
             {
                 return string.Empty;
             }
@@ -46,11 +48,13 @@ namespace WebScrapingEngine.WPRM
 
         private string GetName(HtmlNode node)
         {
-            try
+            var nameNode = node.SelectSingleNode("//h2[contains(@class, 'wprm-recipe-name wprm-block-text-bold')]");
+
+            if (nameNode != null)
             {
-                return node.SelectSingleNode("//h2[contains(@class, 'wprm-recipe-name wprm-block-text-bold')]").InnerText;
+                return nameNode.InnerText;
             }
-            catch
+            else
             {
                 return string.Empty;
             }
