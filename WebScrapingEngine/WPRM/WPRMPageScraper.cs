@@ -2,6 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+
 namespace WebScrapingEngine.WPRM
 {
     using System;
@@ -69,9 +70,24 @@ namespace WebScrapingEngine.WPRM
                     HtmlDocument doc = new HtmlDocument();
                     doc.LoadHtml(item.InnerHtml);
 
-                    amt = doc.DocumentNode.SelectSingleNode("//span[contains(@class, 'wprm-recipe-ingredient-amount')]").InnerText;
-                    unit = doc.DocumentNode.SelectSingleNode("//span[contains(@class, 'wprm-recipe-ingredient-unit')]").InnerText;
-                    name = doc.DocumentNode.SelectSingleNode("//span[contains(@class, 'wprm-recipe-ingredient-name')]").InnerText;
+                    var amountNode = doc.DocumentNode.SelectSingleNode("//span[contains(@class, 'wprm-recipe-ingredient-amount')]");
+                    if (amountNode != null)
+                    {
+                        amt = amountNode.InnerText;
+                    }
+
+                    var unitNode = doc.DocumentNode.SelectSingleNode("//span[contains(@class, 'wprm-recipe-ingredient-unit')]");
+                    if (unitNode != null)
+                    {
+                        unit = unitNode.InnerText;
+                    }
+
+                    var nameNode = doc.DocumentNode.SelectSingleNode("//span[contains(@class, 'wprm-recipe-ingredient-name')]");
+                    if (nameNode != null)
+                    {
+                        name = nameNode.InnerText;
+                    }
+
                     list.Add(new Ingredient(amt + ' ' + unit, name));
                 }
                 catch
