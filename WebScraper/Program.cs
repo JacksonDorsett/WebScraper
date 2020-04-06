@@ -15,7 +15,7 @@ namespace WebScraper
         {
             Stopwatch clock = new Stopwatch();
             
-            Url url = new Url("https://panlasangpinoy.com/");
+            Url url = new Url("https://www.spendwithpennies.com/cheesy-chicken-casserole/");
             StreamWriter fs = new StreamWriter(GetFileName(url));
             WPRMWebscraper scraper = new WPRMWebscraper(url.FullUrl);
 

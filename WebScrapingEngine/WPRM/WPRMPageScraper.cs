@@ -34,16 +34,28 @@ namespace WebScrapingEngine.WPRM
 
         private string GetAuthor(HtmlNode node)
         {
-            var authorNode = node.SelectSingleNode("//span[contains(@class, 'wprm-recipe-details wprm-recipe-author wprm-block-text-normal')]");
+            var curNode = Utility.HtmlSelector.SearchHtmlByInnerText(node, "Author");
+            if (curNode != null)
+            {
+                curNode = curNode.NextSibling;
+                if (curNode != null)
+                {
+                    return curNode.InnerText;
+                }
+            }
 
-            if (authorNode != null)
-            {
-                return authorNode.InnerText;
-            }
-            else
-            {
-                return string.Empty;
-            }
+            return string.Empty;
+
+            //var authorNode = node.SelectSingleNode("//span[contains(@class, 'wprm-recipe-details wprm-recipe-author wprm-block-text-normal')]");
+
+            //if (authorNode != null)
+            //{
+            //    return authorNode.InnerText;
+            //}
+            //else
+            //{
+            //    return string.Empty;
+            //}
         }
 
         private string GetName(HtmlNode node)

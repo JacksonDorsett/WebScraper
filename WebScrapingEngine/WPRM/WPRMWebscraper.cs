@@ -17,7 +17,6 @@ namespace WebScrapingEngine.WPRM
     public class WPRMWebscraper
         : WebScraper<HtmlAgilityPack.HtmlDocument, Recipe>
     {
-
         private Queue<Url> urlQueue;
         private HtmlWeb web;
 
@@ -49,7 +48,7 @@ namespace WebScrapingEngine.WPRM
         /// </summary>
         public override void Scrape()
         {
-            while (this.urlQueue.Count != 0 && this.Recipes.Count < 100)
+            while (this.urlQueue.Count != 0 && this.Recipes.Count < 10)
             {
                 var url = this.urlQueue.Dequeue();
                 var html = this.web.Load(url.FullUrl);

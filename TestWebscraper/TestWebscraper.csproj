@@ -43,6 +43,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UtilityTests\TestHtmlSelector.cs" />
     <Compile Include="WPRM\TestLinkScrapers.cs" />
     <Compile Include="TestPageHistory.cs" />
     <Compile Include="TestQueryParameter.cs" />
