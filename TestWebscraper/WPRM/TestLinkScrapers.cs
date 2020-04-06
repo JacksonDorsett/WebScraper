@@ -42,6 +42,8 @@ namespace TestWebscraper.WPRM
             var list1 = linkscraper.ScrapeLinks(doc);
             Assert.AreEqual(2, list1.Length);
 
+            Assert.AreEqual("https://google.com/help/", list1[0].FullUrl);
+            Assert.AreEqual("https://google.com/privacy/", list1[1].FullUrl);
             var L2 = linkscraper.ScrapeLinks(doc);
             Assert.AreEqual(0, L2.Length);
         }
