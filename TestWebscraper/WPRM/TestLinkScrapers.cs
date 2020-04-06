@@ -29,5 +29,21 @@ namespace TestWebscraper.WPRM
             }
             
         }
+
+        [Test]
+        public void TestDuplicateLinks()
+        {
+            PageHistory ph = new PageHistory();
+            HtmlDocument doc = new HtmlDocument();
+            string html = "<!DOCTYPE html><html><a href=\"https://google.com/help/\"></a>" +
+                "<a href=\"https://google.com/privacy/\"></a></html>";
+            doc.LoadHtml(html);
+            var linkscraper = new InternalLinkScraper(ph, new Url("https://google.com/"));
+            var list1 = linkscraper.ScrapeLinks(doc);
+            Assert.AreEqual(2, list1.Length);
+
+            var L2 = linkscraper.ScrapeLinks(doc);
+            Assert.AreEqual(0, L2.Length);
+        }
     }
 }

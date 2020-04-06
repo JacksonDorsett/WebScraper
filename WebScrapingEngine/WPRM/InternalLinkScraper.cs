@@ -26,9 +26,14 @@ namespace WebScrapingEngine.WPRM
         /// <param name="startingUrl">base url.</param>
         public InternalLinkScraper(PageHistory history, Url startingUrl)
         {
-            this.history = history;
+            this.History = history;
             this.startUrl = startingUrl;
         }
+
+        /// <summary>
+        /// Gets or sets history.
+        /// </summary>
+        internal PageHistory History { get => this.history; set => this.history = value; }
 
         /// <summary>
         /// scrapes all links with same domain.
@@ -43,9 +48,14 @@ namespace WebScrapingEngine.WPRM
                 try
                 {
                     Url url = new Url(node.Attributes["href"].Value);
-                    if (!this.history.CheckUrl(url.FullUrl) && this.startUrl.DomainName == url.DomainName)
+                    if (this.startUrl.DomainName == url.DomainName)
+                    {
+                        Console.Write("");
+                    }
+                    if (!this.History.CheckUrl(url.FullUrl) && this.startUrl.DomainName == url.DomainName)
                     {
                         list.Add(url);
+                        this.History.Add(url.FullUrl);
                     }
                 }
                 catch
