@@ -43,6 +43,13 @@ namespace WebScrapingEngine.WPRM
         public Url[] ScrapeLinks(HtmlDocument html)
         {
             List<Url> list = new List<Url>();
+
+            var nodes = html.DocumentNode.SelectNodes("//a");
+            if (nodes == null)
+            {
+                return list.ToArray();
+            }
+
             foreach (var node in html.DocumentNode.SelectNodes("//a"))
             {
                 try
@@ -52,7 +59,8 @@ namespace WebScrapingEngine.WPRM
                     {
                         Console.Write("");
                     }
-                    if (!this.History.CheckUrl(url.FullUrl) && this.startUrl.DomainName == url.DomainName)
+
+                    if (!this.History.CheckUrl(url.FullUrl) && this.startUrl.DomainName == url.DomainName && !url.FullUrl.Contains('#'))
                     {
                         list.Add(url);
                         this.History.Add(url.FullUrl);

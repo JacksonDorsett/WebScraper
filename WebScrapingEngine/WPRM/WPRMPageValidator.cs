@@ -23,7 +23,7 @@ namespace WebScrapingEngine.WPRM
         /// <returns>if page can be scraped.</returns>
         public bool ValidatePage(HtmlDocument page)
         {
-            foreach (var item in page.DocumentNode.SelectNodes("//div[contains(@class, 'wprm-recipe-container')]"))
+            if (page.DocumentNode.SelectNodes("//div[contains(@class, 'wprm-recipe-container')]") != null)
             {
                 return true;
             }
