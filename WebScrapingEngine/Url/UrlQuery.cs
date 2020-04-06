@@ -49,7 +49,7 @@ namespace WebScrapingEngine
         {
             if (query.Contains('?'))
             {
-                query = query.Replace(query.Substring(0, query.IndexOf('?') +1), string.Empty);
+                query = query.Replace(query.Substring(0, query.IndexOf('?') + 1), string.Empty);
             }
 
             return query;

@@ -1,20 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// <copyright file="WPRMPageScraper.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace WebScrapingEngine.WPRM
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
     using HtmlAgilityPack;
 
+    /// <summary>
+    /// Recipe page scraper.
+    /// </summary>
     public class WPRMPageScraper : IPageScraper<HtmlDocument, Recipe>
     {
         /// <summary>
-        /// 
+        /// Scrapes page for WPRM recipe.
         /// </summary>
-        /// <param name="doc"></param>
-        /// <returns></returns>
+        /// <param name="doc">document being scraped.</param>
+        /// <returns>returns recipe.</returns>
         public Recipe ScrapePage(HtmlDocument doc)
         {
             var wprmContainer = doc.DocumentNode.SelectSingleNode("//div[contains(@class, 'wprm-recipe-container')]");

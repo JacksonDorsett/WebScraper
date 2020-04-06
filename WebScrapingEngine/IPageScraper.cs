@@ -1,15 +1,21 @@
-﻿namespace WebScrapingEngine
+﻿// <copyright file="IPageScraper.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace WebScrapingEngine
 {
     /// <summary>
-    /// Scrapes webpage.
+    /// Interface for Scraping webpage.
     /// </summary>
-    /// <typeparam name="T">Object returned from scraping page</typeparam>
-    public interface IPageScraper<T,U>
+    /// <typeparam name="T">Html doc type.</typeparam>
+    /// <typeparam name="U">Object being scraped.</typeparam>
+    public interface IPageScraper<T, U>
     {
         /// <summary>
         /// Scrapes page.
         /// </summary>
-        /// <returns>Object containing data from scraped page.</returns>
+        /// <param name="doc">html doc to be scraped.</param>
+        /// <returns>Type u.</returns>
         U ScrapePage(T doc);
     }
 }

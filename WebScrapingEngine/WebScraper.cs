@@ -1,31 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// <copyright file="WebScraper.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace WebScrapingEngine
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     /// <summary>
-    /// Webscraper object.
+    /// Webscraper base class.
     /// </summary>
-    /// <typeparam name="T">Object being scraped.</typeparam>
-    public abstract class WebScraper<T,U>
+    /// <typeparam name="T">Html document class.</typeparam>
+    /// <typeparam name="U">Object type being scraped.</typeparam>
+    public abstract class WebScraper<T, U>
     {
-        protected PageHistory history;
+        /// <summary>
+        /// link scraping behavior.
+        /// </summary>
         private readonly ILinkScraper<T> linkScraper;
-        private readonly IPageValidator<T> pageValidator;
-        private readonly IPageScraper<T, U> scraper;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebScraper{T}"/> class.
+        /// Page validation.
+        /// </summary>
+        private readonly IPageValidator<T> pageValidator;
+
+        /// <summary>
+        /// Page scraping behavior.
+        /// </summary>
+        private readonly IPageScraper<T, U> scraper;
+
+        private PageHistory history;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebScraper{T, U}"/> class.
         /// </summary>
         /// <param name="linkScraper">Link Scraper.</param>
         /// <param name="pageScraper">Page Scraper.</param>
         /// <param name="pageValidator">Page Validator.</param>
         protected WebScraper(ILinkScraper<T> linkScraper, IPageScraper<T, U> pageScraper, IPageValidator<T> pageValidator)
         {
-            this.history = new PageHistory();
+            this.History = new PageHistory();
             this.ScrapedObjects = new List<T>();
             this.linkScraper = linkScraper;
             this.pageValidator = pageValidator;
@@ -36,6 +53,26 @@ namespace WebScrapingEngine
         /// Gets list of Objects scraped.
         /// </summary>
         protected List<T> ScrapedObjects { get; private set; }
+
+        /// <summary>
+        /// Gets PageValidatingBehavior.
+        /// </summary>
+        protected IPageValidator<T> PageValidator => this.pageValidator;
+
+        /// <summary>
+        /// Gets link scraping behavior.
+        /// </summary>
+        protected IPageScraper<T, U> Scraper => this.scraper;
+
+        /// <summary>
+        /// Gets Link scraping behavior.
+        /// </summary>
+        protected ILinkScraper<T> LinkScraper => this.linkScraper;
+
+        /// <summary>
+        /// Gets or sets History of the urls visited.
+        /// </summary>
+        protected PageHistory History { get => this.history; set => this.history = value; }
 
         /// <summary>
         /// Abstract Scraping Class.

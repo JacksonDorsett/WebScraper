@@ -1,4 +1,7 @@
-﻿
+﻿// <copyright file="InternalLinkScraper.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace WebScrapingEngine.WPRM
 {
     using System;
@@ -37,7 +40,6 @@ namespace WebScrapingEngine.WPRM
             List<Url> list = new List<Url>();
             foreach (var node in html.DocumentNode.SelectNodes("//a"))
             {
-                
                 try
                 {
                     Url url = new Url(node.Attributes["href"].Value);
@@ -50,6 +52,7 @@ namespace WebScrapingEngine.WPRM
                 {
                 }
             }
+
             return list.ToArray();
         }
     }

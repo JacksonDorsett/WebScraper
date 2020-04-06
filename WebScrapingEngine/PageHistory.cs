@@ -1,4 +1,8 @@
-﻿namespace WebScrapingEngine
+﻿// <copyright file="PageHistory.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace WebScrapingEngine
 {
     using System.Collections.Generic;
 
@@ -7,7 +11,7 @@
     /// </summary>
     public class PageHistory
     {
-        private Dictionary<string, bool> history;
+        private readonly Dictionary<string, bool> history;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PageHistory"/> class.
@@ -30,7 +34,7 @@
         /// <summary>
         /// checks if url has been visited already.
         /// </summary>
-        /// <param name="url">url</param>
+        /// <param name="url">url.</param>
         /// <returns>returns if url has been visited.</returns>
         public bool CheckUrl(string url)
         {
@@ -54,7 +58,7 @@
         /// <summary>
         /// Adds string to url History.
         /// </summary>
-        /// <param name="url">url</param>
+        /// <param name="url">url.</param>
         public void Add(string url)
         {
             this.history[url] = true;

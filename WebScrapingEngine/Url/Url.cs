@@ -22,12 +22,6 @@ namespace WebScrapingEngine
         public Url(string url)
         {
             this.FullUrl = url;
-            //if (this.FilePath[this.FilePath.Length - 1].Contains('?'))
-            //{
-            //    string s = this.FilePath[this.FilePath.Length - 1];
-                
-            //    this.FilePath[this.FilePath.Length - 1] = s.Substring(0, s.IndexOf('?'));
-            //}
         }
 
         /// <summary>
@@ -77,7 +71,6 @@ namespace WebScrapingEngine
 
         private string[] GetFilePath(string url)
         {
-
             url = this.TrimHttps(url);
             url = url.Replace(this.DomainName + '/', string.Empty);
             var v = url.Split('/');
@@ -89,12 +82,11 @@ namespace WebScrapingEngine
             }
 
             return v;
-
         }
 
         private UrlQuery GetQuery()
         {
-            if (FullUrl.Contains('?'))
+            if (this.FullUrl.Contains('?'))
             {
                 return new UrlQuery(this.FullUrl.Substring(this.FullUrl.IndexOf('?')));
             }
