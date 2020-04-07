@@ -2,7 +2,6 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-
 namespace WebScrapingEngine.WPRM
 {
     using System;
@@ -45,17 +44,6 @@ namespace WebScrapingEngine.WPRM
             }
 
             return string.Empty;
-
-            //var authorNode = node.SelectSingleNode("//span[contains(@class, 'wprm-recipe-details wprm-recipe-author wprm-block-text-normal')]");
-
-            //if (authorNode != null)
-            //{
-            //    return authorNode.InnerText;
-            //}
-            //else
-            //{
-            //    return string.Empty;
-            //}
         }
 
         private string GetName(HtmlNode node)
@@ -71,7 +59,6 @@ namespace WebScrapingEngine.WPRM
             }
 
             return string.Empty;
-
         }
 
         private Ingredient[] GetIngredients(HtmlNode node)

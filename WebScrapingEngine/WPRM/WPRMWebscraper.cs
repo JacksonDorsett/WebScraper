@@ -48,7 +48,7 @@ namespace WebScrapingEngine.WPRM
         /// </summary>
         public override void Scrape()
         {
-            while (this.urlQueue.Count != 0 && Recipes.Count < 100)
+            while (this.urlQueue.Count != 0)
             {
                 var url = this.urlQueue.Dequeue();
                 try
