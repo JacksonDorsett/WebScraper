@@ -54,20 +54,21 @@ namespace WebScrapingEngine.WPRM
             {
                 try
                 {
-                    Url url = new Url(node.Attributes["href"].Value);
-                    if (this.startUrl.DomainName == url.DomainName)
+                    var link = node.Attributes["href"];
+                    if (link != null && link.Value.Contains(this.startUrl.DomainName))
                     {
-                        Console.Write("");
-                    }
+                        Url url = new Url(link.Value);
 
-                    if (!this.History.CheckUrl(url.FullUrl) && this.startUrl.DomainName == url.DomainName && !url.FullUrl.Contains('#'))
-                    {
-                        list.Add(url);
-                        this.History.Add(url.FullUrl);
+                        if (!url.FullUrl.Contains('#') && !url.FullUrl.Contains('?') && !this.History.CheckUrl(url.FullUrl) && this.startUrl.DomainName == url.DomainName)
+                        {
+                            list.Add(url);
+                            this.History.Add(url.FullUrl);
+                        }
                     }
                 }
-                catch
+                catch (Exception e)
                 {
+                    Console.WriteLine(e.Message);
                 }
             }
 

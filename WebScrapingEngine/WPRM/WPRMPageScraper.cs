@@ -60,16 +60,18 @@ namespace WebScrapingEngine.WPRM
 
         private string GetName(HtmlNode node)
         {
-            var nameNode = node.SelectSingleNode("//h2[contains(@class, 'wprm-recipe-name wprm-block-text-bold')]");
+            HtmlNode nameNode;
+            for (int i = 1; i <= 4; ++i)
+            {
+                nameNode = node.SelectSingleNode("//h" + i);
+                if (nameNode != null)
+                {
+                    return nameNode.InnerText;
+                }
+            }
 
-            if (nameNode != null)
-            {
-                return nameNode.InnerText;
-            }
-            else
-            {
-                return string.Empty;
-            }
+            return string.Empty;
+
         }
 
         private Ingredient[] GetIngredients(HtmlNode node)
@@ -106,8 +108,9 @@ namespace WebScrapingEngine.WPRM
 
                     list.Add(new Ingredient(amt + ' ' + unit, name));
                 }
-                catch
+                catch (Exception e)
                 {
+                    Console.WriteLine(e.Message);
                 }
             }
 

@@ -35,7 +35,7 @@ namespace WebScrapingEngine.WPRM
             this.Recipes = new List<Recipe>();
             this.web = new HtmlWeb();
             this.urlQueue = new Queue<Url>();
-            this.urlQueue.Enqueue( new Url(baseUrl));
+            this.urlQueue.Enqueue(new Url(baseUrl));
         }
 
         /// <summary>
@@ -48,28 +48,37 @@ namespace WebScrapingEngine.WPRM
         /// </summary>
         public override void Scrape()
         {
-            while (this.urlQueue.Count != 0 && this.Recipes.Count < 10)
+            while (this.urlQueue.Count != 0 && Recipes.Count < 100)
             {
                 var url = this.urlQueue.Dequeue();
-                var html = this.web.Load(url.FullUrl);
+                try
+                {
+                    var html = this.web.Load(url.FullUrl);
 
-                var links = this.LinkScraper.ScrapeLinks(html);
-                foreach (var link in links)
-                {
-                    this.urlQueue.Enqueue(link);
-                }
+                    var links = this.LinkScraper.ScrapeLinks(html);
+                    foreach (var link in links)
+                    {
+                        this.urlQueue.Enqueue(link);
+                    }
 
-                Console.WriteLine($"scraped {links.Length} links from {url.FullUrl}");
-                if (this.PageValidator.ValidatePage(html))
-                {
-                    this.Recipes.Add(this.Scraper.ScrapePage(html));
-                    Console.WriteLine($"Added {this.Recipes.Last().Name} to list");
+                    Console.WriteLine($"scraped {links.Length} links from {url.FullUrl}");
+                    if (this.PageValidator.ValidatePage(html))
+                    {
+                        Recipe r = this.Scraper.ScrapePage(html);
+                        this.Recipes.Add(r);
+                        Console.WriteLine($"Added {r.Name} to list");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{url.FullUrl} did not contain a recipe.");
+                    }
+
+                    Console.WriteLine();
                 }
-                else
+                catch (Exception e)
                 {
-                    Console.WriteLine($"{url.FullUrl} did not contain a recipe.");
+                    Console.WriteLine(e.Message);
                 }
-                Console.WriteLine();
             }
         }
     }
