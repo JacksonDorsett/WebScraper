@@ -34,6 +34,9 @@
     <Reference Include="HtmlAgilityPack, Version=1.11.23.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.11.23\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,6 +64,8 @@
     <Compile Include="WPRM\InternalLinkScraper.cs" />
     <Compile Include="WPRM\Recipe.cs" />
     <Compile Include="WPRM\RecipeInfo.cs" />
+    <Compile Include="WPRM\WPRMJsonPageScaper.cs" />
+    <Compile Include="WPRM\WPRMJsonScraper.cs" />
     <Compile Include="WPRM\WPRMPageScraper.cs" />
     <Compile Include="WPRM\WPRMPageValidator.cs" />
     <Compile Include="WPRM\WPRMWebscraper.cs" />

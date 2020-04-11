@@ -116,7 +116,67 @@ namespace WebScrapingEngine.WPRM
 
         private RecipeInfo GetRecipeInfo(HtmlNode node)
         {
-            return new RecipeInfo(this.GetName(node), this.GetAuthor(node));
+            return new RecipeInfo(
+                this.GetName(node),
+                this.getCookTime(node),
+                this.GetPrepTime(node),
+                this.GetAuthor(node));
+        }
+
+        private int GetPrepTime(HtmlNode node)
+        {
+            int total = 0;
+            node = Utility.HtmlSelector.SearchHtmlByInnerText(node, "Prep Time");
+            total += this.GetMinutes(node) + (this.GetHours(node) * 60);
+            return total;
+
+        }
+
+        private int getCookTime(HtmlNode node)
+        {
+            return 0;
+        }
+        
+        private int GetMinutes(HtmlNode node)
+        {
+            //doc.SelectSingleNode("//*[text()[contains(., 'minutes')]]");
+            int min = 0;
+            
+            if (node != null)
+            {
+                
+                if (node.ParentNode != null)
+                {
+                    node = node.ParentNode;
+                    int.TryParse(node.PreviousSibling.InnerText, out min);
+                }
+            }
+
+            return min;
+        }
+
+        private int GetHours(HtmlNode node)
+        {
+            int hr = 0;
+            if (Utility.HtmlSelector.SearchHtmlByInnerText(node, "hour") != null)
+            {
+                node = Utility.HtmlSelector.SearchHtmlByInnerText(node, "hour");
+            }
+            else if (Utility.HtmlSelector.SearchHtmlByInnerText(node, "hours") != null)
+            {
+                node = Utility.HtmlSelector.SearchHtmlByInnerText(node, "hours");
+            }
+            else
+            {
+                return 0;
+            }
+
+            if (node.PreviousSibling != null)
+            {
+                int.TryParse(node.PreviousSibling.InnerText, out hr);
+            }
+
+            return hr;
         }
     }
 }

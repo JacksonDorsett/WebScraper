@@ -20,41 +20,49 @@ namespace WebScrapingEngine.WPRM
         /// </summary>
         /// <param name="recipeName">name of recipe.</param>
         /// <param name="author">author of recipe.</param>
-        public RecipeInfo(string recipeName, string author)
+        /// <param name="cookTime">cook time of recipe.</param>
+        /// <param name="prepTime">prep time of recipe.</param>
+        public RecipeInfo(string recipeName, int cookTime, int prepTime, string author)
         {
             this.RecipeName = recipeName;
             this.Author = author;
+            this.PrepTime = prepTime;
+            this.CookTime = cookTime;
         }
 
         /// <summary>
-        /// Gets Name of recipe.
+        /// Initializes a new instance of the <see cref="RecipeInfo"/> class.
+        /// </summary>
+        public RecipeInfo()
+        {
+        }
+
+        /// <summary>
+        /// Gets or sets Name of recipe.
         /// </summary>
         public string RecipeName
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
-        /// Gets cook time.
+        /// Gets or sets cook time.
         /// </summary>
-        public int CookTime { get; private set; }
+        public int CookTime { get; set; }
 
         /// <summary>
-        /// Gets prep time.
+        /// Gets or sets prep time.
         /// </summary>
-        public int PrepTime { get; private set; }
+        public int PrepTime { get; set; }
 
         /// <summary>
-        /// Gets author.
+        /// Gets or sets author.
         /// </summary>
         public string Author
         {
             get;
-            private set;
+            set;
         }
-
-
-
     }
 }

@@ -12,8 +12,7 @@ namespace WebScrapingEngine.WPRM
         /// <summary>
         /// Initializes a new instance of the <see cref="Recipe"/> class.
         /// </summary>
-        /// <param name="author">author.</param>
-        /// <param name="name">name of dish.</param>
+        /// <param name="info">name of dish.</param>
         /// <param name="ingredients">ingredients.</param>
         /// <param name="instructions">instructions.</param>
         public Recipe(RecipeInfo info, Ingredient[] ingredients, string[] instructions)
@@ -25,11 +24,15 @@ namespace WebScrapingEngine.WPRM
             this.Instructions = instructions;
         }
 
+
+        /// <summary>
+        /// Gets Recipe Name.
+        /// </summary>
         public string RecipeName
         {
             get
             {
-                return Info.RecipeName;
+                return this.Info.RecipeName;
             }
         }
 

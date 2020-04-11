@@ -43,7 +43,7 @@ namespace WebScrapingEngine
         protected WebScraper(ILinkScraper<T> linkScraper, IPageScraper<T, U> pageScraper, IPageValidator<T> pageValidator)
         {
             this.History = new PageHistory();
-            this.ScrapedObjects = new List<T>();
+            this.ScrapedObjects = new List<U>();
             this.linkScraper = linkScraper;
             this.pageValidator = pageValidator;
             this.scraper = pageScraper;
@@ -52,7 +52,7 @@ namespace WebScrapingEngine
         /// <summary>
         /// Gets list of Objects scraped.
         /// </summary>
-        protected List<T> ScrapedObjects { get; private set; }
+        protected List<U> ScrapedObjects { get; private set; }
 
         /// <summary>
         /// Gets PageValidatingBehavior.

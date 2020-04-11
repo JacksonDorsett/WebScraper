@@ -20,7 +20,7 @@ namespace TestWebscraper.WPRM
             var html = web.Load("https://panlasangpinoy.com/chicken-and-liver-adobo/");
             var scraper = new WebScrapingEngine.WPRM.WPRMPageScraper();
             var r = scraper.ScrapePage(html);
-            Assert.AreEqual("Vanjo Merano", r.Author);
+            Assert.AreEqual("Vanjo Merano", r.Info.Author);
         }
     }
 }
