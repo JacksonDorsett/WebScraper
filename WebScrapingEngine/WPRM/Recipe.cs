@@ -16,23 +16,27 @@ namespace WebScrapingEngine.WPRM
         /// <param name="name">name of dish.</param>
         /// <param name="ingredients">ingredients.</param>
         /// <param name="instructions">instructions.</param>
-        public Recipe(string author, string name, Ingredient[] ingredients, string[] instructions)
+        public Recipe(RecipeInfo info, Ingredient[] ingredients, string[] instructions)
         {
-            this.Author = author;
-            this.Name = name;
+            // this.Author = author;
+            // this.Name = name;
+            this.Info = info;
             this.Ingredients = ingredients;
             this.Instructions = instructions;
         }
 
-        /// <summary>
-        /// Gets Author of recipe.
-        /// </summary>
-        public string Author { get; private set; }
+        public string RecipeName
+        {
+            get
+            {
+                return Info.RecipeName;
+            }
+        }
 
         /// <summary>
-        /// Gets Name of recipe.
+        /// Gets Recipe info.
         /// </summary>
-        public string Name { get; private set; }
+        public RecipeInfo Info { get; private set; }
 
         /// <summary>
         /// Gets Ingredients.

@@ -48,7 +48,7 @@ namespace WebScrapingEngine.WPRM
         /// </summary>
         public override void Scrape()
         {
-            while (this.urlQueue.Count != 0)
+            while (this.urlQueue.Count != 0 && Recipes.Count < 10)
             {
                 var url = this.urlQueue.Dequeue();
                 try
@@ -66,7 +66,7 @@ namespace WebScrapingEngine.WPRM
                     {
                         Recipe r = this.Scraper.ScrapePage(html);
                         this.Recipes.Add(r);
-                        Console.WriteLine($"Added {r.Name} to list");
+                        Console.WriteLine($"Added {r.Info.RecipeName} to list");
                     }
                     else
                     {

@@ -60,6 +60,7 @@
     <Compile Include="WPRM\Ingredient.cs" />
     <Compile Include="WPRM\InternalLinkScraper.cs" />
     <Compile Include="WPRM\Recipe.cs" />
+    <Compile Include="WPRM\RecipeInfo.cs" />
     <Compile Include="WPRM\WPRMPageScraper.cs" />
     <Compile Include="WPRM\WPRMPageValidator.cs" />
     <Compile Include="WPRM\WPRMWebscraper.cs" />

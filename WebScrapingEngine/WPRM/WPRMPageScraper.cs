@@ -25,8 +25,7 @@ namespace WebScrapingEngine.WPRM
         {
             var wprmContainer = doc.DocumentNode.SelectSingleNode("//div[contains(@class, 'wprm-recipe-container')]");
             return new Recipe(
-                this.GetAuthor(wprmContainer),
-                this.GetName(wprmContainer),
+                this.GetRecipeInfo(wprmContainer),
                 this.GetIngredients(wprmContainer),
                 this.GetInstructions(wprmContainer));
         }
@@ -113,6 +112,11 @@ namespace WebScrapingEngine.WPRM
             }
 
             return list.ToArray();
+        }
+
+        private RecipeInfo GetRecipeInfo(HtmlNode node)
+        {
+            return new RecipeInfo(this.GetName(node), this.GetAuthor(node));
         }
     }
 }
