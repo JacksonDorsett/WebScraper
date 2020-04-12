@@ -28,7 +28,7 @@ namespace WebScrapingEngine.WPRM
                 this.GetRecipeInfo(wprmContainer),
                 this.GetIngredients(wprmContainer),
                 this.GetInstructions(wprmContainer),
-                new Url(""));
+                new Url(string.Empty));
         }
 
         private string GetAuthor(HtmlNode node)
@@ -119,9 +119,12 @@ namespace WebScrapingEngine.WPRM
         {
             return new RecipeInfo(
                 this.GetName(node),
-                this.getCookTime(node),
+                this.GetCookTime(node),
                 this.GetPrepTime(node),
-                this.GetAuthor(node));
+                this.GetAuthor(node),
+                null,
+                null,
+                string.Empty);
         }
 
         private int GetPrepTime(HtmlNode node)
@@ -130,22 +133,25 @@ namespace WebScrapingEngine.WPRM
             node = Utility.HtmlSelector.SearchHtmlByInnerText(node, "Prep Time");
             total += this.GetMinutes(node) + (this.GetHours(node) * 60);
             return total;
-
         }
 
-        private int getCookTime(HtmlNode node)
+        /// <summary>
+        /// Gets cook time.
+        /// </summary>
+        /// <param name="node">cook time.</param>
+        /// <returns>time cooking.</returns>
+        private int GetCookTime(HtmlNode node)
         {
             return 0;
         }
-        
+
         private int GetMinutes(HtmlNode node)
         {
-            //doc.SelectSingleNode("//*[text()[contains(., 'minutes')]]");
+            // doc.SelectSingleNode("//*[text()[contains(., 'minutes')]]");
             int min = 0;
-            
+
             if (node != null)
             {
-                
                 if (node.ParentNode != null)
                 {
                     node = node.ParentNode;

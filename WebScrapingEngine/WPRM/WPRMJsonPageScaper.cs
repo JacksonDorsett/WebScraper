@@ -13,15 +13,17 @@ namespace WebScrapingEngine.WPRM
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
-    class WPRMJsonPageScaper
+    /// <summary>
+    /// Scrapes WPRM source data.
+    /// </summary>
+    internal class WPRMJsonPageScaper
         : IPageScraper<HtmlDocument, Recipe>
     {
-
         /// <summary>
-        /// scrapesJsonPage
+        /// scrapesJsonPage.
         /// </summary>
-        /// <param name="doc"></param>
-        /// <returns></returns>
+        /// <param name="doc">doc.</param>
+        /// <returns>scraped recipe.</returns>
         public Recipe ScrapePage(HtmlDocument doc)
         {
             var node = doc.DocumentNode.SelectSingleNode("//script[contains(@type, 'application/ld+json')]");
@@ -52,13 +54,25 @@ namespace WebScrapingEngine.WPRM
 
         private Url GetUrl(JObject obj)
         {
-            //obj["@id"].ToString().Replace("#Recipe", string.Empty);
+            // obj["@id"].ToString().Replace("#Recipe", string.Empty);
             return new Url(obj["@id"].ToString().Replace("#recipe", string.Empty));
         }
 
         private RecipeInfo GetRecipeInfo(JObject obj)
         {
-            return new RecipeInfo(this.GetRecipeName(obj), this.GetCookTime(obj), this.GetPrepTime(obj), this.GetAuthor(obj));
+            return new RecipeInfo(
+                this.GetRecipeName(obj),
+                this.GetCookTime(obj),
+                this.GetPrepTime(obj),
+                this.GetAuthor(obj),
+                this.GetRecipeType(obj),
+                this.GetCuisine(obj),
+                this.GetYeild(obj));
+        }
+
+        private string GetYeild(JObject obj)
+        {
+            return obj["recipeYield"].ToString();
         }
 
         private int GetCookTime(JObject obj)
@@ -73,7 +87,17 @@ namespace WebScrapingEngine.WPRM
 
         private int ParseTimeStamp(string stamp)
         {
-            return int.Parse(stamp.Replace("PT", string.Empty).Replace("M",string.Empty));
+            return int.Parse(stamp.Replace("PT", string.Empty).Replace("M", string.Empty));
+        }
+
+        private string[] GetCuisine(JObject obj)
+        {
+            return obj["recipeCuisine"].ToObject<string[]>();
+        }
+
+        private string[] GetRecipeType(JObject obj)
+        {
+            return obj["recipeCategory"].ToObject<string[]>();
         }
 
         private string GetRecipeName(JObject obj)
@@ -95,7 +119,6 @@ namespace WebScrapingEngine.WPRM
             }
 
             return instructions.ToArray();
-
         }
 
         private Ingredient[] GetIngredients(HtmlNode node)
@@ -137,6 +160,7 @@ namespace WebScrapingEngine.WPRM
                     Console.WriteLine(e.Message);
                 }
             }
+
             return list.ToArray();
         }
     }

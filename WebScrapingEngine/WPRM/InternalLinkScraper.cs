@@ -73,8 +73,6 @@ namespace WebScrapingEngine.WPRM
                 return list.ToArray();
             }
 
-            
-
             foreach (var node in html.DocumentNode.SelectNodes("//a"))
             {
                 try
@@ -110,8 +108,8 @@ namespace WebScrapingEngine.WPRM
                     return true;
                 }
             }
+
             return false;
-            
         }
     }
 }

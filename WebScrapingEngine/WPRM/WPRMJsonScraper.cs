@@ -1,4 +1,7 @@
-﻿
+﻿// <copyright file="WPRMJsonScraper.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace WebScrapingEngine.WPRM
 {
     using System;
@@ -8,9 +11,12 @@ namespace WebScrapingEngine.WPRM
     using System.Threading.Tasks;
     using HtmlAgilityPack;
 
+    /// <summary>
+    /// Scrapes WPRM from json source.
+    /// </summary>
     public class WPRMJsonScraper : WebScraper<HtmlDocument, Recipe>
     {
-        Queue<Url> urlQueue;
+        private Queue<Url> urlQueue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WPRMJsonScraper"/> class.
@@ -26,6 +32,10 @@ namespace WebScrapingEngine.WPRM
             this.urlQueue.Enqueue(url);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WPRMJsonScraper"/> class.
+        /// </summary>
+        /// <param name="url">url list.</param>
         public WPRMJsonScraper(Url[] url)
             : base(
                   new InternalLinkScraper(new PageHistory(), url),
@@ -39,19 +49,23 @@ namespace WebScrapingEngine.WPRM
             }
         }
 
+        /// <summary>
+        /// Gets List of recipes.
+        /// </summary>
         public List<Recipe> Recipes { get => this.ScrapedObjects; }
 
+        /// <summary>
+        /// Scrapes the links.
+        /// </summary>
         public override void Scrape()
         {
             HtmlWeb web = new HtmlWeb();
-            while (this.urlQueue.Count != 0 &&Recipes.Count < 10)
+            while (this.urlQueue.Count != 0 && this.Recipes.Count < 10)
             {
                 var url = this.urlQueue.Dequeue();
                 try
                 {
                     var html = web.Load(url.FullUrl);
-                    
-
                     var links = this.LinkScraper.ScrapeLinks(html);
                     foreach (var link in links)
                     {
