@@ -26,6 +26,19 @@ namespace WebScrapingEngine.WPRM
             this.urlQueue.Enqueue(url);
         }
 
+        public WPRMJsonScraper(Url[] url)
+            : base(
+                  new InternalLinkScraper(new PageHistory(), url),
+                  new WPRMJsonPageScaper(),
+                  new WPRMPageValidator())
+        {
+            this.urlQueue = new Queue<Url>();
+            foreach (var u in url)
+            {
+                this.urlQueue.Enqueue(u);
+            }
+        }
+
         public List<Recipe> Recipes { get => this.ScrapedObjects; }
 
         public override void Scrape()
@@ -37,6 +50,7 @@ namespace WebScrapingEngine.WPRM
                 try
                 {
                     var html = web.Load(url.FullUrl);
+                    
 
                     var links = this.LinkScraper.ScrapeLinks(html);
                     foreach (var link in links)

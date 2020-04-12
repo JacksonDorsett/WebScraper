@@ -15,15 +15,16 @@ namespace WebScrapingEngine.WPRM
         /// <param name="info">name of dish.</param>
         /// <param name="ingredients">ingredients.</param>
         /// <param name="instructions">instructions.</param>
-        public Recipe(RecipeInfo info, Ingredient[] ingredients, string[] instructions)
+        /// <param name="url">url.</param>
+        public Recipe(RecipeInfo info, Ingredient[] ingredients, string[] instructions, Url url)
         {
             // this.Author = author;
             // this.Name = name;
             this.Info = info;
             this.Ingredients = ingredients;
             this.Instructions = instructions;
+            this.Url = url;
         }
-
 
         /// <summary>
         /// Gets Recipe Name.
@@ -50,5 +51,10 @@ namespace WebScrapingEngine.WPRM
         /// Gets instructions for recipe.
         /// </summary>
         public string[] Instructions { get; private set; }
+
+        /// <summary>
+        /// Gets recipe url.
+        /// </summary>
+        public Url Url { get; private set; }
     }
 }

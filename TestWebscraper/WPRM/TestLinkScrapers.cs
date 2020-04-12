@@ -47,5 +47,20 @@ namespace TestWebscraper.WPRM
             var L2 = linkscraper.ScrapeLinks(doc);
             Assert.AreEqual(0, L2.Length);
         }
+
+        [Test]
+        public void TestArrayConstructor()
+        {
+            PageHistory ph = new PageHistory();
+            HtmlDocument doc = new HtmlDocument();
+            string html = "<!DOCTYPE html><html><a href=\"https://google.com/help/\"></a>" +
+                "<a href=\"https://google.com/privacy/\"></a>" +
+                "<a href=\"https://amazon.com/privacy/\"></html>";
+            doc.LoadHtml(html);
+            Url[] urls = { new Url("https://amazon.com/"), new Url("https://google.com/") };
+            var L = new InternalLinkScraper(ph, urls);
+            var ret = L.ScrapeLinks(doc);
+            Assert.AreEqual(3, ret.Length);
+        }
     }
 }

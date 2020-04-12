@@ -65,7 +65,11 @@ namespace WebScrapingEngine
         private string GetDomainName(string url)
         {
             url = this.TrimHttps(url);
-            url = url.Substring(0, url.IndexOf('/'));
+            if (url.Contains('/'))
+            {
+                url = url.Substring(0, url.IndexOf('/'));
+            }
+
             return url;
         }
 

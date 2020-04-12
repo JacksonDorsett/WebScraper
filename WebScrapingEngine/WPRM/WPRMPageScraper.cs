@@ -27,7 +27,8 @@ namespace WebScrapingEngine.WPRM
             return new Recipe(
                 this.GetRecipeInfo(wprmContainer),
                 this.GetIngredients(wprmContainer),
-                this.GetInstructions(wprmContainer));
+                this.GetInstructions(wprmContainer),
+                new Url(""));
         }
 
         private string GetAuthor(HtmlNode node)

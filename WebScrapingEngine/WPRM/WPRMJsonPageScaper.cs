@@ -30,7 +30,11 @@ namespace WebScrapingEngine.WPRM
 
             JObject recipe = this.FindRecipe((JArray)json["@graph"]);
 
-            return new Recipe(GetRecipeInfo(recipe), this.GetIngredients(doc.DocumentNode), this.GetInstructions(recipe));
+            return new Recipe(
+                this.GetRecipeInfo(recipe),
+                this.GetIngredients(doc.DocumentNode),
+                this.GetInstructions(recipe),
+                this.GetUrl(recipe));
         }
 
         private JObject FindRecipe(JArray array)
@@ -46,9 +50,30 @@ namespace WebScrapingEngine.WPRM
             return null;
         }
 
+        private Url GetUrl(JObject obj)
+        {
+            //obj["@id"].ToString().Replace("#Recipe", string.Empty);
+            return new Url(obj["@id"].ToString().Replace("#recipe", string.Empty));
+        }
+
         private RecipeInfo GetRecipeInfo(JObject obj)
         {
-            return new RecipeInfo(GetRecipeName(obj),0,0,GetAuthor(obj));
+            return new RecipeInfo(this.GetRecipeName(obj), this.GetCookTime(obj), this.GetPrepTime(obj), this.GetAuthor(obj));
+        }
+
+        private int GetCookTime(JObject obj)
+        {
+            return this.ParseTimeStamp(obj["cookTime"].ToString());
+        }
+
+        private int GetPrepTime(JObject obj)
+        {
+            return this.ParseTimeStamp(obj["prepTime"].ToString());
+        }
+
+        private int ParseTimeStamp(string stamp)
+        {
+            return int.Parse(stamp.Replace("PT", string.Empty).Replace("M",string.Empty));
         }
 
         private string GetRecipeName(JObject obj)
@@ -114,7 +139,5 @@ namespace WebScrapingEngine.WPRM
             }
             return list.ToArray();
         }
-
-        
     }
 }

@@ -15,8 +15,8 @@ namespace WebScraper
         {
             Stopwatch clock = new Stopwatch();
             
-            Url url = new Url("https://www.theseasonedmom.com/strawberry-bread/");
-            StreamWriter fs = new StreamWriter(GetFileName(url));
+            Url[] url = { new Url("https://panlasangpinoy.com/"), new Url("https://www.theseasonedmom.com/strawberry-bread/") };
+            StreamWriter fs = new StreamWriter("recipes.txt");
             WPRMJsonScraper scraper = new WPRMJsonScraper(url);
 
             clock.Start();
