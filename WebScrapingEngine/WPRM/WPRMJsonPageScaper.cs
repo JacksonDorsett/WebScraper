@@ -30,7 +30,16 @@ namespace WebScrapingEngine.WPRM
             string s = node.InnerText;
             JObject json = JObject.Parse(s);
 
-            JObject recipe = this.FindRecipe((JArray)json["@graph"]);
+            JObject recipe;
+            if ((JArray)json["@graph"] != null)
+            {
+                recipe = this.FindRecipe((JArray)json["@graph"]);
+            }
+            else
+            {
+                recipe = json;
+            }
+            
 
             return new Recipe(
                 this.GetRecipeInfo(recipe),
@@ -54,7 +63,11 @@ namespace WebScrapingEngine.WPRM
 
         private Url GetUrl(JObject obj)
         {
-            // obj["@id"].ToString().Replace("#Recipe", string.Empty);
+            if (obj["@id"] == null)
+            {
+                return null;
+            }
+
             return new Url(obj["@id"].ToString().Replace("#recipe", string.Empty));
         }
 
@@ -72,17 +85,32 @@ namespace WebScrapingEngine.WPRM
 
         private string GetYeild(JObject obj)
         {
-            return obj["recipeYield"].ToString();
+            if (obj["recipeYield"] != null)
+            {
+                return obj["recipeYield"].ToString();
+            }
+
+            return null;
         }
 
         private int GetCookTime(JObject obj)
         {
-            return this.ParseTimeStamp(obj["cookTime"].ToString());
+            if (obj["cookTime"] != null)
+            {
+                return this.ParseTimeStamp(obj["cookTime"].ToString());
+            }
+
+            return 0;
         }
 
         private int GetPrepTime(JObject obj)
         {
-            return this.ParseTimeStamp(obj["prepTime"].ToString());
+            if (obj["prepTime"] != null)
+            {
+                return this.ParseTimeStamp(obj["prepTime"].ToString());
+            }
+
+            return 0;
         }
 
         private int ParseTimeStamp(string stamp)

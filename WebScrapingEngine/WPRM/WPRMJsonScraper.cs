@@ -60,7 +60,7 @@ namespace WebScrapingEngine.WPRM
         public override void Scrape()
         {
             HtmlWeb web = new HtmlWeb();
-            while (this.urlQueue.Count != 0 && this.Recipes.Count < 10)
+            while (this.urlQueue.Count != 0)
             {
                 var url = this.urlQueue.Dequeue();
                 try
@@ -81,14 +81,14 @@ namespace WebScrapingEngine.WPRM
                     }
                     else
                     {
-                        Console.WriteLine($"{url.FullUrl} did not contain a recipe.");
+                        //Console.WriteLine($"{url.FullUrl} did not contain a recipe.");
                     }
 
                     Console.WriteLine();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    //Console.WriteLine(e.Message);
                 }
             }
         }
