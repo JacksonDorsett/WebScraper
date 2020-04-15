@@ -33,7 +33,7 @@ namespace WebScraper
                 
             }
             index = 0;
-            ScrapeSite(new Url("https://www.organicfacts.net/recipe/smoked-salmon-spread.html"), 0);
+            
             foreach (var task in taskList)
             {
                 ScrapeSite(task, 0);

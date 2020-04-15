@@ -120,33 +120,134 @@ namespace WebScrapingEngine.WPRM
 
         private string[] GetCuisine(JObject obj)
         {
-            return obj["recipeCuisine"].ToObject<string[]>();
+            if (obj["recipeCuisine"] != null)
+            {
+                return obj["recipeCuisine"].ToObject<string[]>();
+            }
+
+            return null;
         }
 
         private string[] GetRecipeType(JObject obj)
         {
-            return obj["recipeCategory"].ToObject<string[]>();
+            if (obj["recipeCategory"] != null)
+            {
+                return obj["recipeCategory"].ToObject<string[]>();
+            }
+
+            return null;
         }
 
         private string GetRecipeName(JObject obj)
         {
+            if (obj["name"] == null)
+            {
+                return null;
+            }
+
             return obj["name"].ToString();
         }
 
         private string GetAuthor(JObject obj)
         {
+            if ((obj["author"] as JObject) == null)
+            {
+                return null;
+            }
+
             return (obj["author"] as JObject)["name"].ToString();
         }
 
-        private string[] GetInstructions(JObject obj)
+        private InstructionSet[] GetInstructions(JObject obj)
         {
+            List<InstructionSet> list = new List<InstructionSet>();
+            string prevType = obj["recipeInstructions"][0]["@type"].ToString();
+
             List<string> instructions = new List<string>();
-            foreach (JObject instruct in obj["recipeInstructions"])
+            foreach (var section in obj["recipeInstructions"])
             {
-                instructions.Add(instruct["text"].ToString());
+                if (prevType == section["@type"].ToString())
+                {
+                    if (section["@type"].ToString() == "HowToSection")
+                    {
+                        List<string> steps = new List<string>();
+                        var name = section["name"].ToString();
+
+                        foreach (JObject step in section["itemListElement"])
+                        {
+                            steps.Add(step["text"].ToString());
+                        }
+
+                        list.Add(new InstructionSet(name, steps.ToArray()));
+                    }
+
+                    if (section["@type"].ToString() == "HowToStep")
+                    {
+                        instructions.Add(section["text"].ToString());
+                    }
+                }
+                else
+                {
+                    if (prevType == "HowToStep" && section["@type"].ToString() == "HowToSection")
+                    {
+                        list.Add(new InstructionSet(null, instructions.ToArray()));
+                        instructions.Clear();
+
+                        List<string> steps = new List<string>();
+                        var name = section["name"].ToString();
+
+                        foreach (JObject step in section["itemListElement"])
+                        {
+                            steps.Add(step["text"].ToString());
+                        }
+
+                        list.Add(new InstructionSet(name, steps.ToArray()));
+                    }
+
+                    if (prevType == "HowToSection" && section["@type"].ToString() == "HowToStep")
+                    {
+                        instructions.Add(section["text"].ToString());
+                    }
+                }
+
+                prevType = section["@type"].ToString();
             }
 
-            return instructions.ToArray();
+            //if ((obj["recipeInstructions"][0] as JObject)["@type"].ToString() == "HowToStep")
+            //{
+            //    //List<string> instructions = new List<string>();
+            //    foreach (JObject instruct in obj["recipeInstructions"])
+            //    {
+            //        instructions.Add(instruct["text"].ToString());
+            //    }
+
+            //    InstructionSet[] set = { new InstructionSet("Main Instructions", instructions.ToArray()) };
+            //    return set;
+            //}
+            //else if ((obj["recipeInstructions"][0] as JObject)["@type"].ToString() == "HowToSection")
+            //{
+            //    List<InstructionSet> set = new List<InstructionSet>();
+            //    foreach (var section in obj["recipeInstructions"])
+            //    {
+            //        List<string> steps = new List<string>();
+            //        var name = section["name"].ToString();
+
+            //        foreach (JObject step in section["itemListElement"])
+            //        {
+            //            steps.Add(step["text"].ToString());
+            //        }
+
+            //        set.Add(new InstructionSet(name, steps.ToArray()));
+            //    }
+
+            return list.ToArray();
+            
+
+            Console.WriteLine("Failed to scrape instructions.");
+            return null;
+            
+
+
         }
 
         private Ingredient[] GetIngredients(HtmlNode node)

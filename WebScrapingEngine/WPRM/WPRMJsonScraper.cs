@@ -88,7 +88,7 @@ namespace WebScrapingEngine.WPRM
                 }
                 catch (Exception e)
                 {
-                    //Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
                 }
             }
         }
