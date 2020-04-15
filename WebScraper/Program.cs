@@ -79,7 +79,7 @@ namespace WebScraper
         static void SerializeRecipes(string fileName, WPRMJsonScraper scraper)
         {
             StreamWriter fs = new StreamWriter(fileName);
-            fs.Write(scraper.Recipes);
+            fs.Write(JsonConvert.SerializeObject(scraper.Recipes, Formatting.Indented));
 
             fs.Close();
         }
