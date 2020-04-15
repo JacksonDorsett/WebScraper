@@ -16,7 +16,7 @@ namespace WebScrapingEngine.WPRM
     /// </summary>
     public class WPRMJsonScraper : WebScraper<HtmlDocument, Recipe>
     {
-        private Queue<Url> urlQueue;
+        HtmlWeb web;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WPRMJsonScraper"/> class.
@@ -30,6 +30,7 @@ namespace WebScrapingEngine.WPRM
         {
             this.urlQueue = new Queue<Url>();
             this.urlQueue.Enqueue(url);
+            this.web = new HtmlWeb();
         }
 
         /// <summary>
@@ -42,6 +43,7 @@ namespace WebScrapingEngine.WPRM
                   new WPRMJsonPageScaper(),
                   new WPRMPageValidator())
         {
+            this.web = new HtmlWeb();
             this.urlQueue = new Queue<Url>();
             foreach (var u in url)
             {
@@ -59,13 +61,15 @@ namespace WebScrapingEngine.WPRM
         /// </summary>
         public override void Scrape()
         {
-            HtmlWeb web = new HtmlWeb();
-            while (this.urlQueue.Count != 0)
+            
+            //this.Diagnostics.Start();
+
+            if (this.urlQueue.Count != 0)
             {
                 var url = this.urlQueue.Dequeue();
                 try
                 {
-                    var html = web.Load(url.FullUrl);
+                    var html = this.web.Load(url.FullUrl);
                     var links = this.LinkScraper.ScrapeLinks(html);
                     foreach (var link in links)
                     {
@@ -84,12 +88,26 @@ namespace WebScrapingEngine.WPRM
                         //Console.WriteLine($"{url.FullUrl} did not contain a recipe.");
                     }
 
+                    //this.Diagnostics.Update();
                     Console.WriteLine();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
+            }
+
+            //this.Diagnostics.Stop();
+        }
+
+        /// <summary>
+        /// Continuously Scrapes until queue is empty.
+        /// </summary>
+        public void ScrapeAll()
+        {
+            while (this.urlQueue.Count != 0)
+            {
+                this.Scrape();
             }
         }
     }

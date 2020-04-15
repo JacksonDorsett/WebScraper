@@ -17,6 +17,7 @@ namespace WebScrapingEngine
     /// <typeparam name="U">Object type being scraped.</typeparam>
     public abstract class WebScraper<T, U>
     {
+        internal Queue<Url> urlQueue;
         /// <summary>
         /// link scraping behavior.
         /// </summary>
@@ -31,6 +32,7 @@ namespace WebScrapingEngine
         /// Page scraping behavior.
         /// </summary>
         private readonly IPageScraper<T, U> scraper;
+
 
         private PageHistory history;
 
@@ -50,9 +52,14 @@ namespace WebScrapingEngine
         }
 
         /// <summary>
+        /// Gets if webscraper has anything to scrape.
+        /// </summary>
+        public bool IsScrapeable { get => this.urlQueue.Count != 0; }
+
+        /// <summary>
         /// Gets list of Objects scraped.
         /// </summary>
-        protected List<U> ScrapedObjects { get; private set; }
+        internal List<U> ScrapedObjects { get; private set; }
 
         /// <summary>
         /// Gets PageValidatingBehavior.

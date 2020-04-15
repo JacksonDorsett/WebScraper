@@ -213,40 +213,12 @@ namespace WebScrapingEngine.WPRM
                 prevType = section["@type"].ToString();
             }
 
-            //if ((obj["recipeInstructions"][0] as JObject)["@type"].ToString() == "HowToStep")
-            //{
-            //    //List<string> instructions = new List<string>();
-            //    foreach (JObject instruct in obj["recipeInstructions"])
-            //    {
-            //        instructions.Add(instruct["text"].ToString());
-            //    }
-
-            //    InstructionSet[] set = { new InstructionSet("Main Instructions", instructions.ToArray()) };
-            //    return set;
-            //}
-            //else if ((obj["recipeInstructions"][0] as JObject)["@type"].ToString() == "HowToSection")
-            //{
-            //    List<InstructionSet> set = new List<InstructionSet>();
-            //    foreach (var section in obj["recipeInstructions"])
-            //    {
-            //        List<string> steps = new List<string>();
-            //        var name = section["name"].ToString();
-
-            //        foreach (JObject step in section["itemListElement"])
-            //        {
-            //            steps.Add(step["text"].ToString());
-            //        }
-
-            //        set.Add(new InstructionSet(name, steps.ToArray()));
-            //    }
+            if (instructions.Count != 0)
+            {
+                list.Add(new InstructionSet(null, instructions.ToArray()));
+            }
 
             return list.ToArray();
-            
-
-            Console.WriteLine("Failed to scrape instructions.");
-            return null;
-            
-
 
         }
 

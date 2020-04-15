@@ -53,6 +53,7 @@
     <Compile Include="IPageValidator.cs" />
     <Compile Include="PageHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScraperDiagnostics.cs" />
     <Compile Include="Url\Url.cs" />
     <Compile Include="Url\UrlParameterException.cs" />
     <Compile Include="Url\UrlQuery.cs" />

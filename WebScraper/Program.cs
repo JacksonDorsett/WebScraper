@@ -9,6 +9,7 @@ using WebScrapingEngine.WPRM;
 using Newtonsoft.Json;
 using System.IO;
 using System.Threading.Tasks;
+using HtmlAgilityPack;
 namespace WebScraper
 {
     class Program
@@ -17,9 +18,7 @@ namespace WebScraper
         {
             StreamReader sr = new StreamReader("WPRMSites.csv");
             List<Url> taskList = new List<Url>();
-            ReusableThreadPool pool = new ReusableThreadPool(4);
 
-            int index = 1;
             foreach (string s in sr.ReadToEnd().Split('\n'))
             {
                 try
@@ -32,20 +31,12 @@ namespace WebScraper
                 }
                 
             }
-            index = 0;
             
             foreach (var task in taskList)
             {
                 ScrapeSite(task, 0);
             }
-                //if(pool.IsThreadAvailable())
-                //{
-                //    var task = taskQueue.Dequeue();
-                //    pool.StartThread(task.Execute);
-                //    index++;
-                //}
-                
-                //ScrapeSite(new Url("https://apriljharris.com/vegetable-tagine-vegan-and-gluten-free/"), index++);
+               
             
             Console.ReadKey();
         }
@@ -65,7 +56,7 @@ namespace WebScraper
             WPRMJsonScraper scraper = new WPRMJsonScraper(url);
 
             clock.Start();
-            scraper.Scrape();
+            scraper.ScrapeAll();
             clock.Stop();
             string output = JsonConvert.SerializeObject(scraper.Recipes, Formatting.Indented);
             Console.WriteLine(output);
@@ -73,6 +64,12 @@ namespace WebScraper
             fs.Write(output);
             fs.Close();
             //Console.ReadKey();
+        }
+
+        static void RunWithDiagnostics(Url url)
+        {
+            WPRMJsonScraper scraper = new WPRMJsonScraper(url);
+            ScraperDiagnostics<HtmlDocument, Recipe> diagnostics = new ScraperDiagnostics<HtmlDocument, Recipe>(scraper);
         }
         
     }
