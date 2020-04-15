@@ -32,7 +32,6 @@ namespace WebScrapingEngine
             this.queueTrendList = new List<uint>();
             this.clock = new Stopwatch();
             this.clock.Reset();
-
         }
 
         public void Run()

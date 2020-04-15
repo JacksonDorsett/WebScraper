@@ -16,7 +16,15 @@ namespace WebScraper
     {
         static void Main(string[] args)
         {
-            StreamReader sr = new StreamReader("WPRMSites.csv");
+            //ScrapeFromFile("WPRMSites.csv");
+            RunWithDiagnostics(new Url("https://panlasangpinoy.com/"));
+
+            Console.ReadKey();
+        }
+
+        static void ScrapeFromFile(string fileName)
+        {
+            StreamReader sr = new StreamReader(fileName);
             List<Url> taskList = new List<Url>();
 
             foreach (string s in sr.ReadToEnd().Split('\n'))
@@ -29,15 +37,17 @@ namespace WebScraper
                 {
 
                 }
-                
+
             }
-            
+
             foreach (var task in taskList)
             {
-                ScrapeSite(task, 0);
+                //ScrapeSite(task, 0);
+                RunWithDiagnostics(task);
+                Console.WriteLine("Complete.");
             }
-               
-            
+
+
             Console.ReadKey();
         }
         static string GetFileName(Url url)
@@ -66,10 +76,24 @@ namespace WebScraper
             //Console.ReadKey();
         }
 
+        static void SerializeRecipes(string fileName, WPRMJsonScraper scraper)
+        {
+            StreamWriter fs = new StreamWriter(fileName);
+            fs.Write(scraper.Recipes);
+
+            fs.Close();
+        }
+
+
         static void RunWithDiagnostics(Url url)
         {
             WPRMJsonScraper scraper = new WPRMJsonScraper(url);
             ScraperDiagnostics<HtmlDocument, Recipe> diagnostics = new ScraperDiagnostics<HtmlDocument, Recipe>(scraper);
+            diagnostics.Run();
+            StreamWriter fs = new StreamWriter("1" + GetFileName(url).Replace(".json","") + "_Diagnostics.json");
+            fs.Write(JsonConvert.SerializeObject(diagnostics, Formatting.Indented));
+            fs.Close();
+            SerializeRecipes(GetFileName(url), scraper);
         }
         
     }
