@@ -17,7 +17,7 @@ namespace WebScraper
         static void Main(string[] args)
         {
             //ScrapeFromFile("WPRMSites.csv");
-            RunWithDiagnostics(new Url("https://panlasangpinoy.com/"));
+            RunWithDiagnostics(new Url("https://www.carriesexperimentalkitchen.com/"));
 
             Console.ReadKey();
         }
