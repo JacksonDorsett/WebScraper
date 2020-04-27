@@ -33,5 +33,14 @@ namespace TestWebscraper
             Assert.AreEqual(2, url.Query.Parameters.Length);
 
         }
+        [Test]
+        public void TestContains()
+        {
+            var url = new Url("https://google.com/test/file/accepted/");
+            Assert.That(url.Contains("test"));
+            Assert.That(url.Contains("file"));
+            Assert.That(url.Contains("accepted"));
+            Assert.That(!url.Contains("hello"));
+        }
     }
 }

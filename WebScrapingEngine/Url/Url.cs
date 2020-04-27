@@ -62,6 +62,19 @@ namespace WebScrapingEngine
             }
         }
 
+        public bool Contains(string filePath)
+        {
+            foreach (string path in this.FilePath)
+            {
+                if (path == filePath)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private string GetDomainName(string url)
         {
             url = this.TrimHttps(url);

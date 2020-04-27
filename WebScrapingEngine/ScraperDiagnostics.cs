@@ -32,8 +32,61 @@ namespace WebScrapingEngine
             this.queueTrendList = new List<uint>();
             this.clock = new Stopwatch();
             this.clock.Reset();
-
         }
+
+        /// <summary>
+        /// Gets Pages scraped.
+        /// </summary>
+        public uint PagesScraped { get => (uint)this.scraper.ScrapedObjects.Count; }
+
+        /// <summary>
+        /// Gets pages Visited.
+        /// </summary>
+        public uint PagesVisited { get => (uint)this.queueTrendList.Count; }
+
+        /// <summary>
+        /// Gets time spent scraping.
+        /// </summary>
+        public int TimeScraping { get => this.clock.Elapsed.Minutes; }
+
+        public int PeakQueueLength
+        {
+            get
+            {
+                uint len = 0;
+                foreach (uint length in this.queueTrendList)
+                {
+                    if (length > len)
+                    {
+                        len = length;
+                    }
+                }
+
+                return (int)len;
+            }
+        }
+
+        public int PeakQueueIndex
+        {
+            get
+            {
+                int index = 0;
+                for (int i = 0; i < this.queueTrendList.Count; ++i)
+                {
+                    if (this.queueTrendList[i] > this.queueTrendList[index])
+                    {
+                        index = i;
+                    }
+                }
+
+                return index;
+            }
+        }
+
+        /// <summary>
+        /// Gets List of number of links in queue
+        /// </summary>
+        public uint[] QueueLengthTrend { get => this.queueTrendList.ToArray(); }
 
         public void Run()
         {
@@ -71,22 +124,5 @@ namespace WebScrapingEngine
         {
             this.queueTrendList.Add((uint)this.scraper.urlQueue.Count);
         }
-
-        /// <summary>
-        /// Gets Pages scraped.
-        /// </summary>
-        public uint PagesScraped { get => (uint)this.scraper.ScrapedObjects.Count; }
-
-        /// <summary>
-        /// Gets pages Visited.
-        /// </summary>
-        public uint PagesVisited { get => (uint)this.queueTrendList.Count; }
-
-        /// <summary>
-        /// Gets List of number of links in queue
-        /// </summary>
-        public uint[] QueueLengthTrend { get => this.queueTrendList.ToArray(); }
-
-        public int TimeScraping { get => this.clock.Elapsed.Minutes; }
     }
 }
