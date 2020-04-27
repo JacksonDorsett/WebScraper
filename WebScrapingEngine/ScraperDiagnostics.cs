@@ -49,6 +49,9 @@ namespace WebScrapingEngine
         /// </summary>
         public int TimeScraping { get => this.clock.Elapsed.Minutes; }
 
+        /// <summary>
+        /// Gets the maximum length of the queue.
+        /// </summary>
         public int PeakQueueLength
         {
             get
@@ -66,6 +69,9 @@ namespace WebScrapingEngine
             }
         }
 
+        /// <summary>
+        /// Gets the peak queue length index.
+        /// </summary>
         public int PeakQueueIndex
         {
             get
@@ -84,10 +90,13 @@ namespace WebScrapingEngine
         }
 
         /// <summary>
-        /// Gets List of number of links in queue
+        /// Gets List of number of links in queue.
         /// </summary>
         public uint[] QueueLengthTrend { get => this.queueTrendList.ToArray(); }
 
+        /// <summary>
+        /// Runs Diagnostics.
+        /// </summary>
         public void Run()
         {
             this.Start();

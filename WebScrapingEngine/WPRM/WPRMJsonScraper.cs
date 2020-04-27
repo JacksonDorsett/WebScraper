@@ -16,7 +16,7 @@ namespace WebScrapingEngine.WPRM
     /// </summary>
     public class WPRMJsonScraper : WebScraper<HtmlDocument, Recipe>
     {
-        HtmlWeb web;
+        private readonly HtmlWeb web;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WPRMJsonScraper"/> class.
@@ -25,8 +25,7 @@ namespace WebScrapingEngine.WPRM
         public WPRMJsonScraper(Url url)
             : base(
                   new InternalLinkScraper(new PageHistory(), url),
-                  new WPRMJsonPageScaper(),
-                  new WPRMPageValidator())
+                  new WPRMJsonPageScaper())
         {
             this.UrlQueue = new Queue<Url>();
             this.UrlQueue.Enqueue(url);
@@ -40,8 +39,7 @@ namespace WebScrapingEngine.WPRM
         public WPRMJsonScraper(Url[] url)
             : base(
                   new InternalLinkScraper(new PageHistory(), url),
-                  new WPRMJsonPageScaper(),
-                  new WPRMPageValidator())
+                  new WPRMJsonPageScaper())
         {
             this.web = new HtmlWeb();
             this.UrlQueue = new Queue<Url>();

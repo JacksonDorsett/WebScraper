@@ -29,8 +29,7 @@ namespace WebScrapingEngine.WPRM
                   new InternalLinkScraper(
                       new PageHistory(),
                       new Url(baseUrl)),
-                  new WPRMPageScraper(),
-                  new WPRMPageValidator())
+                  new WPRMPageScraper())
         {
             this.Recipes = new List<Recipe>();
             this.web = new HtmlWeb();
@@ -62,7 +61,7 @@ namespace WebScrapingEngine.WPRM
                     }
 
                     Console.WriteLine($"scraped {links.Length} links from {url.FullUrl}");
-                    if (this.PageValidator.ValidatePage(html))
+                    if (true)
                     {
                         Recipe r = this.Scraper.ScrapePage(html);
                         this.Recipes.Add(r);

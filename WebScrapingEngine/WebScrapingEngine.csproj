@@ -50,7 +50,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ILinkScraper.cs" />
     <Compile Include="IPageScraper.cs" />
-    <Compile Include="IPageValidator.cs" />
     <Compile Include="PageHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScraperDiagnostics.cs" />
@@ -69,7 +68,6 @@
     <Compile Include="WPRM\WPRMJsonPageScaper.cs" />
     <Compile Include="WPRM\WPRMJsonScraper.cs" />
     <Compile Include="WPRM\WPRMPageScraper.cs" />
-    <Compile Include="WPRM\WPRMPageValidator.cs" />
     <Compile Include="WPRM\WPRMWebscraper.cs" />
   </ItemGroup>
   <ItemGroup>

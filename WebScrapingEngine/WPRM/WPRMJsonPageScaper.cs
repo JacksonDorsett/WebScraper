@@ -26,19 +26,6 @@ namespace WebScrapingEngine.WPRM
         /// <returns>scraped recipe.</returns>
         public Recipe ScrapePage(HtmlDocument doc)
         {
-            //var node = doc.DocumentNode.SelectSingleNode("//script[contains(@type, 'application/ld+json')]");
-            //string s = node.InnerText;
-            //JObject json = JObject.Parse(s);
-
-            //JObject recipe;
-            //if ((JArray)json["@graph"] != null)
-            //{
-            //    recipe = this.FindRecipe((JArray)json["@graph"]);
-            //}
-            //else
-            //{
-            //    recipe = json;
-            //}
             var recipe = this.FindRecipeSchema(doc);
 
             if (recipe != null)
@@ -51,7 +38,6 @@ namespace WebScrapingEngine.WPRM
             }
 
             return null;
-            
         }
 
         private JObject FindRecipeSchema(HtmlDocument doc)
@@ -72,7 +58,7 @@ namespace WebScrapingEngine.WPRM
                     }
                 }
 
-                if(json.GetType() == typeof(JObject))
+                if (json.GetType() == typeof(JObject))
                 {
                     if ((JArray)json["@graph"] != null)
                     {
@@ -215,7 +201,6 @@ namespace WebScrapingEngine.WPRM
                 return list.ToArray();
             }
 
-            
             string prevType = obj["recipeInstructions"][0]["@type"].ToString();
 
             List<string> instructions = new List<string>();
@@ -274,7 +259,6 @@ namespace WebScrapingEngine.WPRM
             }
 
             return list.ToArray();
-
         }
 
         private Ingredient[] GetIngredients(JObject obj)
@@ -331,5 +315,4 @@ namespace WebScrapingEngine.WPRM
             return list.ToArray();
         }
     }
-
 }

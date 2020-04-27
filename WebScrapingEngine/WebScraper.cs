@@ -17,22 +17,18 @@ namespace WebScrapingEngine
     /// <typeparam name="U">Object type being scraped.</typeparam>
     public abstract class WebScraper<T, U>
     {
-        private Queue<Url> urlQueue;
         /// <summary>
         /// link scraping behavior.
         /// </summary>
         private readonly ILinkScraper<T> linkScraper;
 
-        /// <summary>
-        /// Page validation.
-        /// </summary>
-        private readonly IPageValidator<T> pageValidator;
 
         /// <summary>
         /// Page scraping behavior.
         /// </summary>
         private readonly IPageScraper<T, U> scraper;
 
+        private Queue<Url> urlQueue;
 
         private PageHistory history;
 
@@ -42,12 +38,11 @@ namespace WebScrapingEngine
         /// <param name="linkScraper">Link Scraper.</param>
         /// <param name="pageScraper">Page Scraper.</param>
         /// <param name="pageValidator">Page Validator.</param>
-        protected WebScraper(ILinkScraper<T> linkScraper, IPageScraper<T, U> pageScraper, IPageValidator<T> pageValidator)
+        protected WebScraper(ILinkScraper<T> linkScraper, IPageScraper<T, U> pageScraper)
         {
             this.History = new PageHistory();
             this.ScrapedObjects = new List<U>();
             this.linkScraper = linkScraper;
-            this.pageValidator = pageValidator;
             this.scraper = pageScraper;
         }
 
@@ -62,9 +57,9 @@ namespace WebScrapingEngine
         internal List<U> ScrapedObjects { get; private set; }
 
         /// <summary>
-        /// Gets PageValidatingBehavior.
+        /// Gets or sets UrlQueue.
         /// </summary>
-        protected IPageValidator<T> PageValidator => this.pageValidator;
+        internal Queue<Url> UrlQueue { get => this.urlQueue; set => this.urlQueue = value; }
 
         /// <summary>
         /// Gets link scraping behavior.
@@ -80,7 +75,6 @@ namespace WebScrapingEngine
         /// Gets or sets History of the urls visited.
         /// </summary>
         protected PageHistory History { get => this.history; set => this.history = value; }
-        internal Queue<Url> UrlQueue { get => urlQueue; set => urlQueue = value; }
 
         /// <summary>
         /// Abstract Scraping Class.
