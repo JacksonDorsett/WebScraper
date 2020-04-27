@@ -82,7 +82,7 @@ namespace WebScrapingEngine.WPRM
                     {
                         Url url = new Url(link.Value);
 
-                        if (!url.FullUrl.Contains('#') && !url.FullUrl.Contains('?') && !url.FullUrl.Contains(".jpg") && !this.History.CheckUrl(url.FullUrl))
+                        if (!url.FullUrl.Contains('#') && !url.FullUrl.Contains('?') && !url.FullUrl.Contains(".jpg") && !url.FullUrl.Contains(".pdf") && !url.FullUrl.Contains(".jpeg") && !this.History.CheckUrl(url.FullUrl))
                         {
                             list.Add(url);
                             this.History.Add(url.FullUrl);

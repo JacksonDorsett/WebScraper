@@ -61,8 +61,7 @@ namespace WebScrapingEngine.WPRM
         /// </summary>
         public override void Scrape()
         {
-            
-            //this.Diagnostics.Start();
+            // this.Diagnostics.Start();
 
             if (this.urlQueue.Count != 0)
             {
@@ -77,17 +76,15 @@ namespace WebScrapingEngine.WPRM
                     }
 
                     Console.WriteLine($"scraped {links.Length} links from {url.FullUrl}");
-                    if (this.PageValidator.ValidatePage(html))
+
+                    Recipe r = this.Scraper.ScrapePage(html);
+                    if (r != null)
                     {
-                        Recipe r = this.Scraper.ScrapePage(html);
                         this.Recipes.Add(r);
                         Console.WriteLine($"Added {r.Info.RecipeName} to list");
                     }
-                    else
-                    {
-                        //Console.WriteLine($"{url.FullUrl} did not contain a recipe.");
-                    }
 
+                    
                     //this.Diagnostics.Update();
                     Console.WriteLine();
                 }

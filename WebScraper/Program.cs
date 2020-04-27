@@ -10,12 +10,16 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using System.Net.Http;
+using System.Net;
 namespace WebScraper
 {
     class Program
     {
         static void Main(string[] args)
         {
+            //TestAsyncWebclient();
+
             StreamReader sr = new StreamReader("WPRMSites.csv");
             List<Url> taskList = new List<Url>();
 
@@ -29,15 +33,15 @@ namespace WebScraper
                 {
 
                 }
-                
+
             }
-            
+
             foreach (var task in taskList)
             {
                 ScrapeSite(task, 0);
             }
-               
-            
+
+
             Console.ReadKey();
         }
         static string GetFileName(Url url)
@@ -71,6 +75,6 @@ namespace WebScraper
             WPRMJsonScraper scraper = new WPRMJsonScraper(url);
             ScraperDiagnostics<HtmlDocument, Recipe> diagnostics = new ScraperDiagnostics<HtmlDocument, Recipe>(scraper);
         }
-        
+
     }
 }

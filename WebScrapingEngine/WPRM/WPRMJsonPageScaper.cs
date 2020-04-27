@@ -26,26 +26,66 @@ namespace WebScrapingEngine.WPRM
         /// <returns>scraped recipe.</returns>
         public Recipe ScrapePage(HtmlDocument doc)
         {
-            var node = doc.DocumentNode.SelectSingleNode("//script[contains(@type, 'application/ld+json')]");
-            string s = node.InnerText;
-            JObject json = JObject.Parse(s);
+            //var node = doc.DocumentNode.SelectSingleNode("//script[contains(@type, 'application/ld+json')]");
+            //string s = node.InnerText;
+            //JObject json = JObject.Parse(s);
 
-            JObject recipe;
-            if ((JArray)json["@graph"] != null)
-            {
-                recipe = this.FindRecipe((JArray)json["@graph"]);
-            }
-            else
-            {
-                recipe = json;
-            }
-            
+            //JObject recipe;
+            //if ((JArray)json["@graph"] != null)
+            //{
+            //    recipe = this.FindRecipe((JArray)json["@graph"]);
+            //}
+            //else
+            //{
+            //    recipe = json;
+            //}
+            var recipe = this.FindRecipeSchema(doc);
 
-            return new Recipe(
+            if (recipe != null)
+            {
+                return new Recipe(
                 this.GetRecipeInfo(recipe),
-                this.GetIngredients(doc.DocumentNode),
+                this.GetIngredients(recipe),
                 this.GetInstructions(recipe),
                 this.GetUrl(recipe));
+            }
+
+            return null;
+            
+        }
+
+        private JObject FindRecipeSchema(HtmlDocument doc)
+        {
+            foreach (var node in doc.DocumentNode.SelectNodes("//script[contains(@type, 'application/ld+json')]"))
+            {
+                string s = node.InnerText;
+                JToken json = JToken.Parse(s);
+                JObject recipe;
+
+                if (json.GetType() == typeof(JArray))
+                {
+                    recipe = this.FindRecipe((JArray)json);
+
+                    if (recipe != null)
+                    {
+                        return recipe;
+                    }
+                }
+
+                if(json.GetType() == typeof(JObject))
+                {
+                    if ((JArray)json["@graph"] != null)
+                    {
+                        recipe = this.FindRecipe((JArray)json["@graph"]);
+                    }
+                    else
+                    {
+                        recipe = (JObject)json;
+                    }
+                }
+            }
+
+            return null;
         }
 
         private JObject FindRecipe(JArray array)
@@ -115,6 +155,11 @@ namespace WebScrapingEngine.WPRM
 
         private int ParseTimeStamp(string stamp)
         {
+            if (stamp == string.Empty)
+            {
+                return 0;
+            }
+
             return int.Parse(stamp.Replace("PT", string.Empty).Replace("M", string.Empty));
         }
 
@@ -161,6 +206,16 @@ namespace WebScrapingEngine.WPRM
         private InstructionSet[] GetInstructions(JObject obj)
         {
             List<InstructionSet> list = new List<InstructionSet>();
+
+            if (!obj["recipeInstructions"].ToString().Contains("{") && !obj["recipeInstructions"].ToString().Contains("["))
+            {
+                var steps = new List<string>();
+                steps.Add(obj["recipeInstructions"].ToString());
+                list.Add(new InstructionSet(null, steps.ToArray()));
+                return list.ToArray();
+            }
+
+            
             string prevType = obj["recipeInstructions"][0]["@type"].ToString();
 
             List<string> instructions = new List<string>();
@@ -222,6 +277,17 @@ namespace WebScrapingEngine.WPRM
 
         }
 
+        private Ingredient[] GetIngredients(JObject obj)
+        {
+            List<Ingredient> list = new List<Ingredient>();
+            foreach (string ing in obj["recipeIngredient"])
+            {
+                list.Add(new Ingredient(string.Empty, ing.Replace("\n", string.Empty).Replace("\r", string.Empty)));
+            }
+
+            return list.ToArray();
+        }
+
         private Ingredient[] GetIngredients(HtmlNode node)
         {
             List<Ingredient> list = new List<Ingredient>();
@@ -265,4 +331,5 @@ namespace WebScrapingEngine.WPRM
             return list.ToArray();
         }
     }
+
 }
