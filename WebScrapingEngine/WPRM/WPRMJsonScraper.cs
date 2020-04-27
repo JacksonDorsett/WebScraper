@@ -28,8 +28,8 @@ namespace WebScrapingEngine.WPRM
                   new WPRMJsonPageScaper(),
                   new WPRMPageValidator())
         {
-            this.urlQueue = new Queue<Url>();
-            this.urlQueue.Enqueue(url);
+            this.UrlQueue = new Queue<Url>();
+            this.UrlQueue.Enqueue(url);
             this.web = new HtmlWeb();
         }
 
@@ -44,10 +44,10 @@ namespace WebScrapingEngine.WPRM
                   new WPRMPageValidator())
         {
             this.web = new HtmlWeb();
-            this.urlQueue = new Queue<Url>();
+            this.UrlQueue = new Queue<Url>();
             foreach (var u in url)
             {
-                this.urlQueue.Enqueue(u);
+                this.UrlQueue.Enqueue(u);
             }
         }
 
@@ -61,18 +61,16 @@ namespace WebScrapingEngine.WPRM
         /// </summary>
         public override void Scrape()
         {
-            // this.Diagnostics.Start();
-
-            if (this.urlQueue.Count != 0)
+            if (this.UrlQueue.Count != 0)
             {
-                var url = this.urlQueue.Dequeue();
+                var url = this.UrlQueue.Dequeue();
                 try
                 {
                     var html = this.web.Load(url.FullUrl);
                     var links = this.LinkScraper.ScrapeLinks(html);
                     foreach (var link in links)
                     {
-                        this.urlQueue.Enqueue(link);
+                        this.UrlQueue.Enqueue(link);
                     }
 
                     Console.WriteLine($"scraped {links.Length} links from {url.FullUrl}");
@@ -84,8 +82,6 @@ namespace WebScrapingEngine.WPRM
                         Console.WriteLine($"Added {r.Info.RecipeName} to list");
                     }
 
-                    
-                    //this.Diagnostics.Update();
                     Console.WriteLine();
                 }
                 catch (Exception e)
@@ -93,8 +89,6 @@ namespace WebScrapingEngine.WPRM
                     Console.WriteLine(e.Message);
                 }
             }
-
-            //this.Diagnostics.Stop();
         }
 
         /// <summary>
@@ -102,7 +96,7 @@ namespace WebScrapingEngine.WPRM
         /// </summary>
         public void ScrapeAll()
         {
-            while (this.urlQueue.Count != 0)
+            while (this.UrlQueue.Count != 0)
             {
                 this.Scrape();
             }

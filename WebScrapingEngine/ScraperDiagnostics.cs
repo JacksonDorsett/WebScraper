@@ -16,7 +16,7 @@ namespace WebScrapingEngine
     /// </summary>
     /// <typeparam name="T">Html doc type.</typeparam>
     /// <typeparam name="U">Output Type.</typeparam>
-    public class ScraperDiagnostics<T,U>
+    public class ScraperDiagnostics<T, U>
     {
         private readonly WebScraper<T, U> scraper;
         private List<uint> queueTrendList;
@@ -122,7 +122,7 @@ namespace WebScrapingEngine
         /// <param name="pageScraped">was page scraped.</param>
         private void Update()
         {
-            this.queueTrendList.Add((uint)this.scraper.urlQueue.Count);
+            this.queueTrendList.Add((uint)this.scraper.UrlQueue.Count);
         }
     }
 }
