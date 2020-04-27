@@ -16,7 +16,7 @@ namespace WebScrapingEngine.WPRM
     /// <summary>
     /// Scrapes WPRM source data.
     /// </summary>
-    internal class WPRMJsonPageScaper
+    internal class RecipePageScaper
         : IPageScraper<HtmlDocument, Recipe>
     {
         /// <summary>

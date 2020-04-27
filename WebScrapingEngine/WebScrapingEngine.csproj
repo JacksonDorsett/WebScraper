@@ -65,10 +65,8 @@
     <Compile Include="WPRM\InternalLinkScraper.cs" />
     <Compile Include="WPRM\Recipe.cs" />
     <Compile Include="WPRM\RecipeInfo.cs" />
-    <Compile Include="WPRM\WPRMJsonPageScaper.cs" />
-    <Compile Include="WPRM\WPRMJsonScraper.cs" />
-    <Compile Include="WPRM\WPRMPageScraper.cs" />
-    <Compile Include="WPRM\WPRMWebscraper.cs" />
+    <Compile Include="WPRM\RecipePageScaper.cs" />
+    <Compile Include="WPRM\RecipeWebScraper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

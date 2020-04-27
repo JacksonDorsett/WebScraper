@@ -14,18 +14,18 @@ namespace WebScrapingEngine.WPRM
     /// <summary>
     /// Scrapes WPRM from json source.
     /// </summary>
-    public class WPRMJsonScraper : WebScraper<HtmlDocument, Recipe>
+    public class RecipeWebScraper : WebScraper<HtmlDocument, Recipe>
     {
         private readonly HtmlWeb web;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WPRMJsonScraper"/> class.
+        /// Initializes a new instance of the <see cref="RecipeWebScraper"/> class.
         /// </summary>
         /// <param name="url">url.</param>
-        public WPRMJsonScraper(Url url)
+        public RecipeWebScraper(Url url)
             : base(
                   new InternalLinkScraper(new PageHistory(), url),
-                  new WPRMJsonPageScaper())
+                  new RecipePageScaper())
         {
             this.UrlQueue = new Queue<Url>();
             this.UrlQueue.Enqueue(url);
@@ -33,13 +33,13 @@ namespace WebScrapingEngine.WPRM
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WPRMJsonScraper"/> class.
+        /// Initializes a new instance of the <see cref="RecipeWebScraper"/> class.
         /// </summary>
         /// <param name="url">url list.</param>
-        public WPRMJsonScraper(Url[] url)
+        public RecipeWebScraper(Url[] url)
             : base(
                   new InternalLinkScraper(new PageHistory(), url),
-                  new WPRMJsonPageScaper())
+                  new RecipePageScaper())
         {
             this.web = new HtmlWeb();
             this.UrlQueue = new Queue<Url>();

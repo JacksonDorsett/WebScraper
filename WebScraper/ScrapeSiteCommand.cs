@@ -27,7 +27,7 @@ namespace WebScraper
             Stopwatch clock = new Stopwatch();
 
             
-            WPRMJsonScraper scraper = new WPRMJsonScraper(url);
+            RecipeWebScraper scraper = new RecipeWebScraper(url);
 
             clock.Start();
             scraper.Scrape();

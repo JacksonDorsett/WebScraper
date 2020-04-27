@@ -66,7 +66,7 @@ namespace WebScraper
             Stopwatch clock = new Stopwatch();
 
             StreamWriter fs = new StreamWriter(index + GetFileName(url));
-            WPRMJsonScraper scraper = new WPRMJsonScraper(url);
+            RecipeWebScraper scraper = new RecipeWebScraper(url);
 
             clock.Start();
             scraper.ScrapeAll();
@@ -79,7 +79,7 @@ namespace WebScraper
             //Console.ReadKey();
         }
 
-        static void SerializeRecipes(string fileName, WPRMJsonScraper scraper)
+        static void SerializeRecipes(string fileName, RecipeWebScraper scraper)
         {
             StreamWriter fs = new StreamWriter(fileName);
             fs.Write(JsonConvert.SerializeObject(scraper.Recipes, Formatting.Indented));
@@ -90,7 +90,7 @@ namespace WebScraper
 
         static void RunWithDiagnostics(Url url)
         {
-            WPRMJsonScraper scraper = new WPRMJsonScraper(url);
+            RecipeWebScraper scraper = new RecipeWebScraper(url);
             ScraperDiagnostics<HtmlDocument, Recipe> diagnostics = new ScraperDiagnostics<HtmlDocument, Recipe>(scraper);
             diagnostics.Run();
             StreamWriter fs = new StreamWriter("1" + GetFileName(url).Replace(".json","") + "_Diagnostics.json");
