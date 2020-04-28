@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using WebScrapingEngine;
-
+using WebScrapingEngine.Recipe;
 namespace TestWebscraper.WPRM
 {
     [TestFixture]
@@ -18,7 +18,7 @@ namespace TestWebscraper.WPRM
         {
             HtmlWeb web = new HtmlWeb();
             var html = web.Load("https://panlasangpinoy.com/chicken-and-liver-adobo/");
-            var scraper = new WebScrapingEngine.WPRM.WPRMPageScraper();
+            var scraper = new RecipePageScaper();
             var r = scraper.ScrapePage(html);
             Assert.AreEqual("Vanjo Merano", r.Info.Author);
         }

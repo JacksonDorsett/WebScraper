@@ -1,5 +1,8 @@
-﻿
-namespace WebScrapingEngine.WPRM
+﻿// <copyright file="InstructionSet.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace WebScrapingEngine.Recipe
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +15,6 @@ namespace WebScrapingEngine.WPRM
     /// </summary>
     public class InstructionSet
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="InstructionSet"/> class.
         /// </summary>

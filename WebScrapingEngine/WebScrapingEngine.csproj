@@ -50,10 +50,10 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ILinkScraper.cs" />
     <Compile Include="IPageScraper.cs" />
-    <Compile Include="IPageValidator.cs" />
     <Compile Include="PageHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScraperDiagnostics.cs" />
+    <Compile Include="Sitemap.cs" />
     <Compile Include="Url\Url.cs" />
     <Compile Include="Url\UrlParameterException.cs" />
     <Compile Include="Url\UrlQuery.cs" />
@@ -61,16 +61,13 @@
     <Compile Include="Utility\HtmlSelector.cs" />
     <Compile Include="Utility\Pair.cs" />
     <Compile Include="WebScraper.cs" />
-    <Compile Include="WPRM\Ingredient.cs" />
-    <Compile Include="WPRM\InstructionSet.cs" />
-    <Compile Include="WPRM\InternalLinkScraper.cs" />
-    <Compile Include="WPRM\Recipe.cs" />
-    <Compile Include="WPRM\RecipeInfo.cs" />
-    <Compile Include="WPRM\WPRMJsonPageScaper.cs" />
-    <Compile Include="WPRM\WPRMJsonScraper.cs" />
-    <Compile Include="WPRM\WPRMPageScraper.cs" />
-    <Compile Include="WPRM\WPRMPageValidator.cs" />
-    <Compile Include="WPRM\WPRMWebscraper.cs" />
+    <Compile Include="Recipe\Ingredient.cs" />
+    <Compile Include="Recipe\InstructionSet.cs" />
+    <Compile Include="Recipe\InternalLinkScraper.cs" />
+    <Compile Include="Recipe\Recipe.cs" />
+    <Compile Include="Recipe\RecipeInfo.cs" />
+    <Compile Include="Recipe\RecipePageScaper.cs" />
+    <Compile Include="Recipe\RecipeWebScraper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

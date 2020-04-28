@@ -16,7 +16,7 @@ namespace WebScrapingEngine
     /// </summary>
     /// <typeparam name="T">Html doc type.</typeparam>
     /// <typeparam name="U">Output Type.</typeparam>
-    public class ScraperDiagnostics<T,U>
+    public class ScraperDiagnostics<T, U>
     {
         private readonly WebScraper<T, U> scraper;
         private List<uint> queueTrendList;
@@ -49,6 +49,9 @@ namespace WebScrapingEngine
         /// </summary>
         public int TimeScraping { get => this.clock.Elapsed.Minutes; }
 
+        /// <summary>
+        /// Gets the maximum length of the queue.
+        /// </summary>
         public int PeakQueueLength
         {
             get
@@ -66,6 +69,9 @@ namespace WebScrapingEngine
             }
         }
 
+        /// <summary>
+        /// Gets the peak queue length index.
+        /// </summary>
         public int PeakQueueIndex
         {
             get
@@ -84,10 +90,13 @@ namespace WebScrapingEngine
         }
 
         /// <summary>
-        /// Gets List of number of links in queue
+        /// Gets List of number of links in queue.
         /// </summary>
         public uint[] QueueLengthTrend { get => this.queueTrendList.ToArray(); }
 
+        /// <summary>
+        /// Runs Diagnostics.
+        /// </summary>
         public void Run()
         {
             this.Start();
@@ -122,7 +131,7 @@ namespace WebScrapingEngine
         /// <param name="pageScraped">was page scraped.</param>
         private void Update()
         {
-            this.queueTrendList.Add((uint)this.scraper.urlQueue.Count);
+            this.queueTrendList.Add((uint)this.scraper.UrlQueue.Count);
         }
     }
 }

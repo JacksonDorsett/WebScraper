@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Diagnostics;
 using WebScrapingEngine;
-using WebScrapingEngine.WPRM;
+using WebScrapingEngine.Recipe;
 using Newtonsoft.Json;
 using System.IO;
 
@@ -27,7 +27,7 @@ namespace WebScraper
             Stopwatch clock = new Stopwatch();
 
             
-            WPRMJsonScraper scraper = new WPRMJsonScraper(url);
+            RecipeWebScraper scraper = new RecipeWebScraper(url);
 
             clock.Start();
             scraper.Scrape();

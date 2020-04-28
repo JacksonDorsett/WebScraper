@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace WebScrapingEngine.WPRM
+namespace WebScrapingEngine.Recipe
 {
     using System;
     using System.Collections.Generic;
@@ -82,7 +82,7 @@ namespace WebScrapingEngine.WPRM
                     {
                         Url url = new Url(link.Value);
 
-                        if (!url.FullUrl.Contains('#') && !url.Contains("wprm_print") && !url.Contains("wp-content") && !url.FullUrl.Contains('?') && !url.FullUrl.Contains(".jpg") && !this.History.CheckUrl(url.FullUrl))
+                        if (!url.FullUrl.Contains('#') && !url.FullUrl.Contains('?') && !url.FullUrl.Contains(".jpg") && !url.FullUrl.Contains(".pdf") && !url.Contains("wprm_print") && !url.Contains("wp-content") && !url.FullUrl.Contains(".jpeg") && !this.History.CheckUrl(url.FullUrl))
                         {
                             list.Add(url);
                             this.History.Add(url.FullUrl);
