@@ -22,7 +22,6 @@ namespace WebScrapingEngine
         /// </summary>
         private readonly ILinkScraper<T> linkScraper;
 
-
         /// <summary>
         /// Page scraping behavior.
         /// </summary>

@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace WebScrapingEngine.WPRM
+namespace WebScrapingEngine.Recipe
 {
     /// <summary>
     /// Recipe class.

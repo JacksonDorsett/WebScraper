@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
-using WebScrapingEngine.WPRM;
+using WebScrapingEngine.Recipe;
 using WebScrapingEngine;
 
 namespace TestWebscraper.WPRM
