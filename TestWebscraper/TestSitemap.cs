@@ -16,7 +16,7 @@ namespace TestWebscraper
         {
             Sitemap map = new Sitemap(new Url("https://www.allrecipes.com/sitemap.xml"));
             var urls = map.GetUrls;
-            Assert.AreEqual(2, urls.Length);
+            Assert.AreEqual(10, urls.Length);
         }
     }
 }

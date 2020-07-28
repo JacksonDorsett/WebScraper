@@ -29,7 +29,27 @@ namespace WebScrapingEngine.Recipe
         /// <returns>time duration in minutes.</returns>
         public int Parse(string timeCode)
         {
-            return 0;
+            if (timeCode[0] != 'P' && timeCode[1] != 'T')
+            {
+                return -1;
+            }
+
+            timeCode = timeCode.Replace("PT", string.Empty);
+            int minuteTime = 0;
+            string t = string.Empty;
+            foreach (char c in timeCode)
+            {
+                if (char.IsNumber(c))
+                {
+                    t += c;
+                }
+                else
+                {
+                    minuteTime += int.Parse(t) * (Convert.ToInt32(c == 'M') + Convert.ToInt32(c == 'H') * 60);
+                    t = string.Empty;
+                }
+            }
+            return minuteTime;
         }
     }
 }
