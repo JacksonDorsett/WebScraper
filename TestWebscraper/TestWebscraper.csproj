@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestSitemap.cs" />
+    <Compile Include="TestTimeCodeParser.cs" />
     <Compile Include="UtilityTests\TestHtmlSelector.cs" />
     <Compile Include="WPRM\TestLinkScrapers.cs" />
     <Compile Include="TestPageHistory.cs" />

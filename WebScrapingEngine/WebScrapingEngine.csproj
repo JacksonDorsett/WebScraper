@@ -52,6 +52,7 @@
     <Compile Include="IPageScraper.cs" />
     <Compile Include="PageHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recipe\TimeCodeParser.cs" />
     <Compile Include="ScraperDiagnostics.cs" />
     <Compile Include="Sitemap.cs" />
     <Compile Include="Url\Url.cs" />
