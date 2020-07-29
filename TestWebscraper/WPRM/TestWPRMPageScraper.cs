@@ -18,7 +18,7 @@ namespace TestWebscraper.WPRM
         {
             HtmlWeb web = new HtmlWeb();
             var html = web.Load("https://panlasangpinoy.com/chicken-and-liver-adobo/");
-            var scraper = new RecipePageScaper();
+            var scraper = new RecipePageScraper();
             var r = scraper.ScrapePage(html);
             Assert.AreEqual("Vanjo Merano", r.Info.Author);
         }

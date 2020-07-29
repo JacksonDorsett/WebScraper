@@ -50,6 +50,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ILinkScraper.cs" />
     <Compile Include="IPageScraper.cs" />
+    <Compile Include="NoScraper.cs" />
     <Compile Include="PageHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recipe\TimeCodeParser.cs" />
