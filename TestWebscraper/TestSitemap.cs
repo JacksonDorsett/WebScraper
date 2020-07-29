@@ -15,8 +15,10 @@ namespace TestWebscraper
         public void TestGetUrls()
         {
             Sitemap map = new Sitemap(new Url("https://www.allrecipes.com/sitemap.xml"));
+
             var urls = map.Urls;
-            Assert.AreEqual(2, urls.Length);
+            Assert.AreEqual(10, urls.Length);
+
         }
         [Test]
         public void TestGetUrlWithGzip()
