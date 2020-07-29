@@ -123,7 +123,7 @@ namespace WebScrapingEngine.Recipe
         {
             if (obj["cookTime"] != null)
             {
-                return this.ParseTimeStamp(obj["cookTime"].ToString());
+                return new TimeCodeParser().Parse((string)obj["cookTime"]);
             }
 
             return 0;
@@ -133,20 +133,10 @@ namespace WebScrapingEngine.Recipe
         {
             if (obj["prepTime"] != null)
             {
-                return this.ParseTimeStamp(obj["prepTime"].ToString());
+                return new TimeCodeParser().Parse((string)obj["prepTime"]);
             }
 
             return 0;
-        }
-
-        private int ParseTimeStamp(string stamp)
-        {
-            if (stamp == string.Empty)
-            {
-                return 0;
-            }
-
-            return int.Parse(stamp.Replace("PT", string.Empty).Replace("M", string.Empty));
         }
 
         private string[] GetCuisine(JObject obj)

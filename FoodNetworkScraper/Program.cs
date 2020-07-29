@@ -10,7 +10,7 @@ namespace FoodNetworkScraper
     {
         static void Main(string[] args)
         {
-
+            
         }
     }
 }
