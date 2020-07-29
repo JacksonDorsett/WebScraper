@@ -146,7 +146,7 @@ namespace WebScrapingEngine.Recipe
                 return 0;
             }
 
-            return int.Parse(stamp.Replace("PT", string.Empty).Replace("M", string.Empty));
+            return int.Parse(stamp.Replace("PT", string.Empty).Replace("M", string.Empty).Replace("S", string.Empty).Replace("H",string.Empty));
         }
 
         private string[] GetCuisine(JObject obj)

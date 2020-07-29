@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebScrapingEngine;
+using System.Diagnostics;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace FoodNetworkScraper
 {
@@ -10,7 +14,27 @@ namespace FoodNetworkScraper
     {
         static void Main(string[] args)
         {
+            Sitemap[] sitemaps = { new Sitemap(new Url("https://www.allrecipes.com/recipedetail.xml.gz")), new Sitemap(new Url("https://www.allrecipes.com/recipedetail2.xml.gz")), new Sitemap(new Url("https://www.allrecipes.com/recipedetail3.xml.gz")) };
+            ScrapeSitemap(sitemaps);
+            Console.ReadKey();
+        }
 
+        static void ScrapeSitemap(Sitemap[] sitemaps)
+        {
+            Stopwatch clock = new Stopwatch();
+            string siteName = sitemaps[0].Urls[0].DomainName;
+            StreamWriter fs = new StreamWriter(siteName.Substring(0, siteName.LastIndexOf('.')) + ".json");
+            SitemapRecipeScraper scraper = new SitemapRecipeScraper(sitemaps);
+
+            clock.Start();
+            scraper.Scrape();
+            clock.Stop();
+            string output = JsonConvert.SerializeObject(scraper.Recipes, Formatting.Indented);
+            Console.WriteLine(output);
+            Console.WriteLine($"recipes scraped {scraper.Recipes.Length}\ntime elapsed: {clock.Elapsed.Minutes}");
+            fs.Write(output);
+            fs.Close();
+            //Console.ReadKey();
         }
     }
 }

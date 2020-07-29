@@ -8,7 +8,7 @@ namespace WebScrapingEngine.Recipe
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
+    using System.Threading;
     using HtmlAgilityPack;
 
     /// <summary>
@@ -30,6 +30,18 @@ namespace WebScrapingEngine.Recipe
             this.UrlQueue = new Queue<Url>();
             this.UrlQueue.Enqueue(url);
             this.web = new HtmlWeb();
+        }
+
+        public RecipeWebScraper(Url[] urls, ILinkScraper<HtmlDocument> linkScraper)
+            : base(linkScraper, new RecipePageScaper())
+        {
+            this.web = new HtmlWeb();
+            web.UserAgent = "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)";
+            this.UrlQueue = new Queue<Url>();
+            foreach (Url url in urls)
+            {
+                this.UrlQueue.Enqueue(url);
+            }
         }
 
         /// <summary>
@@ -85,6 +97,7 @@ namespace WebScrapingEngine.Recipe
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    Thread.Sleep(10);
                 }
             }
         }
