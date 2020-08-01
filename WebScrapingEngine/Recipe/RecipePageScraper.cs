@@ -68,6 +68,7 @@ namespace WebScrapingEngine.Recipe
                     {
                         recipe = (JObject)json;
                     }
+                    return recipe;
                 }
             }
 
@@ -121,7 +122,7 @@ namespace WebScrapingEngine.Recipe
 
         private int GetCookTime(JObject obj)
         {
-            if (obj["cookTime"] != null)
+            if (obj["cookTime"] != null && obj["cookTime"].ToString() != string.Empty)
             {
                 return new TimeCodeParser().Parse((string)obj["cookTime"]);
             }
@@ -131,7 +132,7 @@ namespace WebScrapingEngine.Recipe
 
         private int GetPrepTime(JObject obj)
         {
-            if (obj["prepTime"] != null)
+            if (obj["prepTime"] != null && obj["prepTime"].ToString() != string.Empty)
             {
                 return new TimeCodeParser().Parse((string)obj["prepTime"]);
             }
@@ -153,7 +154,7 @@ namespace WebScrapingEngine.Recipe
         {
             if (obj["recipeCategory"] != null)
             {
-                return obj["recipeCategory"].ToObject<string[]>();
+                return obj["recipeCategory"].ToObject<string>().Split(',');
             }
 
             return null;
@@ -171,12 +172,24 @@ namespace WebScrapingEngine.Recipe
 
         private string GetAuthor(JObject obj)
         {
-            if ((obj["author"] as JObject) == null)
+
+            if (obj["author"] != null)
             {
-                return null;
+                if (obj["author"].HasValues)
+                {
+                    return (obj["author"] as JObject)["name"].ToString();
+                }
+
+                return obj["author"].ToString();
             }
 
-            return (obj["author"] as JObject)["name"].ToString();
+            return null;
+            //if ((obj["author"] as JObject) == null)
+            //{
+            //    return null;
+            //}
+            
+            //return (obj["author"] as JObject)["name"].ToString();
         }
 
         private InstructionSet[] GetInstructions(JObject obj)
@@ -251,12 +264,12 @@ namespace WebScrapingEngine.Recipe
             return list.ToArray();
         }
 
-        private Ingredient[] GetIngredients(JObject obj)
+        private string[] GetIngredients(JObject obj)
         {
-            List<Ingredient> list = new List<Ingredient>();
+            List<string> list = new List<string>();
             foreach (string ing in obj["recipeIngredient"])
             {
-                list.Add(new Ingredient(string.Empty, ing.Replace("\n", string.Empty).Replace("\r", string.Empty)));
+                list.Add(ing.Replace("\n", string.Empty).Replace("\r", string.Empty).Replace("   "," "));
             }
 
             return list.ToArray();

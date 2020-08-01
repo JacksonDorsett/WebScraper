@@ -9,11 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebScrapingEngine", "WebScr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebscraper", "TestWebscraper\TestWebscraper.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
-<<<<<<< HEAD
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeClensingTools", "RecipeClensingTools\RecipeClensingTools.csproj", "{8C1E4AB1-C550-47AB-BF1A-CE846FC258FA}"
-=======
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodNetworkScraper", "FoodNetworkScraper\FoodNetworkScraper.csproj", "{047FB8F6-08D3-433D-8668-8F4D86EBE1F2}"
->>>>>>> ac1a27cf9fec6d433256c3581f73f52ab686590d
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitemapScraper", "FoodNetworkScraper\SitemapScraper.csproj", "{047FB8F6-08D3-433D-8668-8F4D86EBE1F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,17 +29,10 @@ Global
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< HEAD
-		{8C1E4AB1-C550-47AB-BF1A-CE846FC258FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C1E4AB1-C550-47AB-BF1A-CE846FC258FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C1E4AB1-C550-47AB-BF1A-CE846FC258FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C1E4AB1-C550-47AB-BF1A-CE846FC258FA}.Release|Any CPU.Build.0 = Release|Any CPU
-=======
 		{047FB8F6-08D3-433D-8668-8F4D86EBE1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{047FB8F6-08D3-433D-8668-8F4D86EBE1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{047FB8F6-08D3-433D-8668-8F4D86EBE1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{047FB8F6-08D3-433D-8668-8F4D86EBE1F2}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> ac1a27cf9fec6d433256c3581f73f52ab686590d
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

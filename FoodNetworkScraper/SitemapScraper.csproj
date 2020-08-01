@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{047FB8F6-08D3-433D-8668-8F4D86EBE1F2}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FoodNetworkScraper</RootNamespace>
-    <AssemblyName>FoodNetworkScraper</AssemblyName>
+    <RootNamespace>SitemapScraper</RootNamespace>
+    <AssemblyName>SitemapScraper</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

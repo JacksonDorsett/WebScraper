@@ -14,7 +14,7 @@ namespace FoodNetworkScraper
     {
         static void Main(string[] args)
         {
-            Sitemap[] sitemaps = { new Sitemap(new Url("https://www.allrecipes.com/recipedetail.xml.gz")), new Sitemap(new Url("https://www.allrecipes.com/recipedetail2.xml.gz")), new Sitemap(new Url("https://www.allrecipes.com/recipedetail3.xml.gz")) };
+            Sitemap[] sitemaps = { new Sitemap(new Url("https://www.food.com/sitemap-1.xml.gz")), new Sitemap(new Url("https://www.food.com/sitemap-2.xml.gz")), new Sitemap(new Url("https://www.food.com/sitemap-3.xml.gz")), new Sitemap(new Url("https://www.food.com/sitemap-4.xml.gz")),new Sitemap(new Url("https://www.food.com/sitemap-5.xml.gz")), new Sitemap(new Url("https://www.food.com/sitemap-6.xml.gz")), new Sitemap(new Url("https://www.food.com/sitemap-7.xml.gz")) };
             ScrapeSitemap(sitemaps);
             Console.ReadKey();
         }

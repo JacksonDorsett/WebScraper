@@ -68,7 +68,7 @@
     <Compile Include="Recipe\InternalLinkScraper.cs" />
     <Compile Include="Recipe\Recipe.cs" />
     <Compile Include="Recipe\RecipeInfo.cs" />
-    <Compile Include="Recipe\RecipePageScaper.cs" />
+    <Compile Include="Recipe\RecipePageScraper.cs" />
     <Compile Include="Recipe\RecipeWebScraper.cs" />
   </ItemGroup>
   <ItemGroup>

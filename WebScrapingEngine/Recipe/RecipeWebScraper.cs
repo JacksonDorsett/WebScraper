@@ -86,6 +86,7 @@ namespace WebScrapingEngine.Recipe
                     Console.WriteLine($"scraped {links.Length} links from {url.FullUrl}");
 
                     Recipe r = this.Scraper.ScrapePage(html);
+                    r.Url = url;
                     if (r != null)
                     {
                         this.Recipes.Add(r);
