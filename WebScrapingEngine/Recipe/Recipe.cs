@@ -55,6 +55,6 @@ namespace WebScrapingEngine.Recipe
         /// <summary>
         /// Gets recipe url.
         /// </summary>
-        public Url Url { get; internal set; }
+        public Url Url { get; set; }
     }
 }

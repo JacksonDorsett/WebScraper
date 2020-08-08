@@ -74,16 +74,16 @@ namespace WebScrapingEngine.Recipe
         /// <summary>
         /// Gets Cuisine.
         /// </summary>
-        public string[] Cuisine { get; private set; }
+        public string[] Cuisine { get; set; }
 
         /// <summary>
         /// Gets Yeild.
         /// </summary>
-        public string Yeild { get; private set; }
+        public string Yeild { get; set; }
 
         /// <summary>
         /// Gets Type of dish.
         /// </summary>
-        public string[] DishType { get; private set; }
+        public string[] DishType { get; set; }
     }
 }

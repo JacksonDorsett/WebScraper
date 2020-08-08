@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebscraper", "TestWebsc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitemapScraper", "FoodNetworkScraper\SitemapScraper.csproj", "{047FB8F6-08D3-433D-8668-8F4D86EBE1F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeDatabaseManager", "RecipeDatabaseManager\RecipeDatabaseManager.csproj", "{276811A1-993A-499E-9CAA-6E301F250D7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{047FB8F6-08D3-433D-8668-8F4D86EBE1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{047FB8F6-08D3-433D-8668-8F4D86EBE1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{047FB8F6-08D3-433D-8668-8F4D86EBE1F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{276811A1-993A-499E-9CAA-6E301F250D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{276811A1-993A-499E-9CAA-6E301F250D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{276811A1-993A-499E-9CAA-6E301F250D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{276811A1-993A-499E-9CAA-6E301F250D7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

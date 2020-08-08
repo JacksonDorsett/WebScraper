@@ -38,7 +38,7 @@ namespace WebScrapingEngine
         /// <summary>
         /// Gets and sets Full url.
         /// </summary>
-        public string FullUrl { get; private set; }
+        public string FullUrl { get; set; }
 
         /// <summary>
         /// Gets and sets filePath.
