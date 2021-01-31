@@ -9,8 +9,8 @@
     <ProjectGuid>{8EDF4429-251A-416D-BB68-93F227191BCF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestWebscraper</RootNamespace>
-    <AssemblyName>TestWebscraper</AssemblyName>
+    <RootNamespace>Test.Webscraper</RootNamespace>
+    <AssemblyName>Test.Webscraper</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
